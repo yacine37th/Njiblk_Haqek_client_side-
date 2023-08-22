@@ -157,18 +157,19 @@ class _AvocatRegisterState extends State<AvocatRegister> {
           .doc(credential.user!.uid)
           .set({
         "userID": credential.user!.uid,
-        "userType": "باحث محام",
+        "userType": "محامي",
         "userEmail": email.text,
         "userName": username.text,
-        // "userWilaya": _selectedLocation,
+        "userWilaya": _selectedLocation,
         "userPhoneNumber": phone.text,
-        "isAccepted?": true,
+        "isAccepted?": false,
+        "userCV": "",
       });
       Get.back();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(
-              "تم التسجيل بشكل جيد للغاية ، والآن يرجى انتظار الاتصال منا")));
-      Get.back();
+              "تم التسجيل بشكل جيد للغاية ،والآن يرجى تحميل السيرة الداتية")));
+      Get.toNamed("/avocatRegisterInfo");
       // Get.defaultDialog(
       //     title: "Votre compte a ete bien créé",
       //     onConfirm: () {
@@ -590,6 +591,10 @@ class _AvocatRegisterState extends State<AvocatRegister> {
                               //   (Route<dynamic> route) => false,
                               // );
                             }
+                            // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            //     content: Text(
+                            //         "تم التسجيل بشكل جيد للغاية ،والآن يرجى تحميل السيرة الداتية")));
+                            // Get.toNamed("/avocatRegisterInfo");
                           },
                           child: const Text(
                             "إنشاء حساب",

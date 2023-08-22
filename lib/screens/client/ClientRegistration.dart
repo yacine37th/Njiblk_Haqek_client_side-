@@ -135,15 +135,14 @@ class _ClientRegistrationState extends State<ClientRegistration> {
 
   Future createNewUser() async {
     Get.defaultDialog(
-      barrierDismissible: false,
-      title: "يرجى الانتظار",
-      content: const CircularProgressIndicator(
-        backgroundColor: goldenColor,
-      ),
-      //  onConfirm: () {
-      //     Get.back();
-      //   },
-    );
+        onWillPop: () {
+          return Future.value();
+        },
+        barrierDismissible: false,
+        title: "يرجى الانتظار",
+        content: const CircularProgressIndicator(
+          backgroundColor: goldenColor,
+        ));
     try {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -157,46 +156,20 @@ class _ClientRegistrationState extends State<ClientRegistration> {
           .doc(credential.user!.uid)
           .set({
         "userID": credential.user!.uid,
-        "userType": "محامي",
+        "userType": "باحث محام",
         "userEmail": email.text,
         "userName": username.text,
-        "userWilaya": _selectedLocation,
+        // "userWilaya": _selectedLocation,
         "userPhoneNumber": phone.text,
-        "isAccepted?": false,
+        "isAccepted?": true,
+        // "userCV" : "",
       });
       Get.back();
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-              "تم التسجيل بشكل جيد للغاية ، والآن يرجى انتظار الاتصال منا")));
-      Get.back();
-      // Get.defaultDialog(
-      //     title: "Votre compte a ete bien créé",
-      //     onConfirm: () {
-      //       Get.back();
-      //     });
-      // Navigator.of(context).pop();
-      // } else {
-      //   FirebaseFirestore.instance
-      //       .collection("users")
-      //       .doc(credential.user!.uid)
-      //       .set({
-      //     "userID": credential.user!.uid,
-      //     "userEmail": email.text,
-      //     "userName": username.text,
-      //     "userType": _selectedLocation,
-      //     // "nombreAbsence": "",
-      //     // "note" : "",
-      //     // "traivailsIDS":[],
-      //     // "justificationValid?" : false,
-      //   });
-      //   Get.back();
-      //   ScaffoldMessenger.of(context).showSnackBar(
-      //       SnackBar(content: Text("Inscription a été trés bien fait")));
-      //   Navigator.of(context).pop();
-      // }
-      // await FirebaseAuth.instance.currentUser?.sendEmailVerification();
 
-      // Get.toNamed("/EmailVerification");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content:
+              Text("تم التسجيل بشكل جيد للغاية ، والآن يرجى تسجيل الدخول  ")));
+      Get.back();
     } on FirebaseAuthException catch (e) {
       Get.back();
 
@@ -249,32 +222,6 @@ class _ClientRegistrationState extends State<ClientRegistration> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
 
                     children: [
-                      // Padding(
-                      //     padding: const EdgeInsets.symmetric(
-                      //         vertical: 10, horizontal: 30),
-                      //     child: DropdownButtonFormField(
-                      //         value: _selectedValue,
-                      //         hint: Text('choose the Category of the book'),
-                      //         isExpanded: true,
-                      //         onChanged: (value) {
-                      //           setState(() {
-                      //             _selectedValue = value;
-                      //           });
-                      //         },
-                      //         onSaved: (value) {
-                      //           setState(() {
-                      //             _selectedValue = value;
-                      //           });
-                      //         },
-                      //         validator: (value) =>
-                      //             value == null ? 'Select the Category of the book' : null,
-                      //         items: categorieList.map((category) {
-                      //           return DropdownMenuItem(
-                      //             child: Text(category["name"]),
-                      //             value: category,
-                      //           );
-                      //         }).toList())),
-
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 30),
@@ -341,14 +288,12 @@ class _ClientRegistrationState extends State<ClientRegistration> {
                           ),
                         ),
                       ),
-
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 30),
                         child: TextFormField(
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.emailAddress,
-
                           controller: email,
                           validator: (val) {
                             if (val!.isEmpty) {
@@ -362,14 +307,6 @@ class _ClientRegistrationState extends State<ClientRegistration> {
 
                             return null;
                           },
-                          // onSaved: (emailAddress) {
-                          //   signUpController.userEmailAddress =
-                          //       emailAddress?.trim();
-                          // },
-                          // onChanged: (emailAddress) {
-                          //   signUpController.userEmailAddress =
-                          //       emailAddress.trim();
-                          // },
                           decoration: const InputDecoration(
                             focusedBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
@@ -387,7 +324,6 @@ class _ClientRegistrationState extends State<ClientRegistration> {
                           ),
                         ),
                       ),
-
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 30),
@@ -433,145 +369,6 @@ class _ClientRegistrationState extends State<ClientRegistration> {
                           ),
                         ),
                       ),
-                      // Padding(
-                      //     padding: const EdgeInsets.symmetric(
-                      //         vertical: 10, horizontal: 30),
-                      //     child: DropdownButtonFormField(
-                      //         value: _selectedValueAuth,
-                      //         hint: Text('choose the Author of the book'),
-                      //         isExpanded: true,
-                      //          validator: (value) =>
-                      //             value == null ? 'Select the Author of the book' : null,
-                      //         onChanged: (value) {
-                      //           setState(() {
-                      //             _selectedValueAuth = value;
-                      //           });
-                      //         },
-                      //         onSaved: (value) {
-                      //           setState(() {
-                      //             _selectedValueAuth = value;
-                      //           });
-                      //         },
-                      //         items: authorList.map((category) {
-                      //           return DropdownMenuItem(
-                      //             child: Text(category["name"]),
-                      //             value: category,
-                      //           );
-                      //         }).toList())),
-                      //    Padding(
-                      //   padding: const EdgeInsets.symmetric(
-                      //       vertical: 15, horizontal: 30),
-                      //   child: TextFormField(
-                      //     minLines: 3,
-                      //     maxLines: 8,
-                      //     keyboardType: TextInputType.multiline,
-                      //     controller: bookAbout,
-                      //     validator: (value) {
-                      //       if (value == null || value.isEmpty) {
-                      //         return 'Please enter the Descrption of the Book';
-                      //       }
-                      //       return null;
-                      //     },
-                      //     decoration: InputDecoration(
-                      //       alignLabelWithHint: true,
-                      //       border: OutlineInputBorder(),
-                      //       hintText: "Enter the Descrption of the Book",
-                      //       // labelText: 'Enter text',
-                      //     ),
-                      //   ),
-                      // ),
-                      //  Padding(
-                      //   padding: const EdgeInsets.symmetric(
-                      //       vertical: 15, horizontal: 30),
-                      //   child: TextFormField(
-                      //     keyboardType: TextInputType.number,
-                      //     validator: (value) {
-                      //       if (value == null || value.isEmpty) {
-                      //         return 'Please enter the Price of the Book';
-                      //       }
-                      //       return null;
-                      //     },
-                      //     controller: bookPrice,
-                      //     decoration: InputDecoration(
-                      //       alignLabelWithHint: true,
-                      //       border: OutlineInputBorder(),
-                      //       hintText: "Enter the Price of the Book",
-                      //       // labelText: 'Enter text',
-                      //     ),
-                      //   ),
-                      // ),
-
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(
-                      //       vertical: 15, horizontal: 30),
-                      //   child: TextFormField(
-                      //     // minLines: 3,
-                      //     // maxLines: 8,
-                      //     // keyboardType: TextInputType.multiline,
-                      //     validator: (value) {
-                      //       if (value == null || value.isEmpty) {
-                      //         return 'Please enter the publisher house';
-                      //       }
-                      //       return null;
-                      //     },
-                      //     controller: bookPublishingHouse,
-                      //     decoration: InputDecoration(
-                      //       alignLabelWithHint: true,
-                      //       border: OutlineInputBorder(),
-                      //       hintText: "Enter the publisher house",
-                      //       // labelText: 'Enter text',
-                      //     ),
-                      //   ),
-                      // ),
-
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 30),
-                      //   child: ElevatedButton(
-                      //      style: ButtonStyle(
-                      // backgroundColor:  MaterialStateProperty.all(Color.fromRGBO(32, 48, 61, 1))
-
-                      // ),
-                      //     onPressed: () {},
-                      //     child: const Text('Select Picture of the book'),
-                      //   ),
-                      // ),
-
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 30),
-                      //   child: ElevatedButton(
-                      //      style: ButtonStyle(
-                      // backgroundColor:  MaterialStateProperty.all(Color.fromRGBO(32, 48, 61, 1))
-
-                      // ),
-                      //     onPressed: (){},
-                      //     child: const Text('Select File'),
-                      //   ),
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(
-                      //       vertical: 10, horizontal: 30),
-                      //   child: DropdownButton(
-                      //     hint: Text("ولايةالتي تنشط فيها"),
-                      //     // Text("ولاية ال\\"), // Not necessary for Option 1
-                      //     value: _selectedLocation,
-
-                      //     onChanged: (newValue) {
-                      //       setState(() {
-                      //         _selectedLocation = newValue;
-                      //       });
-                      //     },
-                      //     //  validator: (value) =>
-                      //     //       value == null ? 'Select the Category of the book' : null,
-
-                      //     items: _locations.map((location) {
-                      //       return DropdownMenuItem(
-                      //         child: new Text(location),
-                      //         value: location,
-                      //       );
-                      //     }).toList(),
-                      //   ),
-                      // ),
-                   
                       const SizedBox(
                         height: 20,
                       ),
@@ -583,14 +380,8 @@ class _ClientRegistrationState extends State<ClientRegistration> {
                                 MaterialStateProperty.all(greenColor),
                           ),
                           onPressed: () {
-                            if (_formKey.currentState!.validate() &&
-                                _selectedLocation != null) {
+                            if (_formKey.currentState!.validate()) {
                               createNewUser();
-                              //          Navigator.pushAndRemoveUntil(
-                              //   context,
-                              //   MaterialPageRoute(builder: (context) =>),
-                              //   (Route<dynamic> route) => false,
-                              // );
                             }
                           },
                           child: const Text(

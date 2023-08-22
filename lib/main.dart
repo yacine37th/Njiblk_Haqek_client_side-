@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:avocat/Home.dart';
 import 'package:avocat/HomeScreen.dart';
 import 'package:avocat/firebase_options.dart';
 import 'package:avocat/screens/SingIn.dart';
 import 'package:avocat/screens/SingUp.dart';
+import 'package:avocat/screens/home/AvocatRegisterInfo.dart';
 import 'package:avocat/screens/client/ClientLogin.dart';
 import 'package:avocat/screens/client/ClientRegistration.dart';
 import 'package:avocat/screens/home/Avocat.dart';
@@ -73,13 +75,18 @@ class _MyAppState extends State<MyApp> {
       // defaultTransition: Transition.cupertino,
       // theme: Themes.customLightTheme,
       // textDirection: MainFunctions.textDirection,
-      home: HomeScreen() ,
+      // home: HomeScreen() ,
       //     ? HomeScreen()
       //     // de
       //     //     ? HomeEtudiant()
       //     //     : HomeEnsi()
       //     : SingIn(),
+      initialRoute: "/home",
       getPages: [
+        GetPage(
+          name: "/homee",
+          page: () => const Home(),
+        ),
         GetPage(
           name: "/home",
           page: () => const HomeScreen(),
@@ -91,6 +98,10 @@ class _MyAppState extends State<MyApp> {
          GetPage(
           name: "/avocatRegister",
           page: () => const AvocatRegister(),
+        ),
+         GetPage(
+          name: "/avocatRegisterInfo",
+          page: () => const AvocatRegisterInfo(),
         ),
         GetPage(
           name: "/clientLogin",

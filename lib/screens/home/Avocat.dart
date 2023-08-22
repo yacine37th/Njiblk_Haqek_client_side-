@@ -61,6 +61,10 @@ class _AvocatState extends State<Avocat> {
 
   var db = FirebaseFirestore.instance;
   Route route = MaterialPageRoute(builder: (context) => HomeScreen());
+  bool isVerified = false;
+    bool islawyer = false;
+
+  var data;
 
   Future signInAUser() async {
     Get.defaultDialog(
@@ -80,11 +84,75 @@ class _AvocatState extends State<Avocat> {
       //   context,
       //   MaterialPageRoute(builder: (context) => HomeScreen()),
       // );
-      Get.back();
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Login avec success")));
-      Navigator.pushReplacement(context, route);
+        //    FirebaseFirestore.instance
+        //     .collection('users')
+        //     .doc(credential.)
+        //     .get()
+        //     .then((snapshot) {
+        //   // Use ds as a snapshot
+        //   setState(() {
+        //     usercurrent = snapshot.data()!;
+        //     // print('Values from db /////////////////////////////////: ' +
+        //     //     data["TypeUser"]);
+        //     //  user = snapshot.data()!;
+        //   });
 
+        //   // print('Values from db /////////////////////////////////: ' + data["TypeUser"]);
+        // });
+         print(" //////////////////////////// credential");
+   print(credential.user!.uid!);
+     FirebaseFirestore.instance
+            .collection('users')
+            .doc(credential.user!.uid!)
+            .get()
+            .then((snapshot) {
+          // Use ds as a snapshot
+          setState(() {
+            data= snapshot.data()!;
+            // print('Values from db /////////////////////////////////: ' +
+            //     data["TypeUser"]);
+            isVerified = data["isAccepted?"];
+            if(data["userType"] == "محامي"){
+                          islawyer= true; 
+            }
+            //  user = snapshot.data()!;
+          });
+
+          // print('Values from db /////////////////////////////////: ' + data["TypeUser"]);
+        });
+      print(isVerified);
+      Get.back();
+      if(islawyer){
+         if(isVerified ==false ){
+          Get.defaultDialog(
+          backgroundColor: goldenColor,
+          barrierDismissible: false,
+          title: "   يرجى الإنتظار حتى يتم قبولك ",
+          titleStyle: TextStyle(color: whiteColor),
+          content: ElevatedButton(
+            onPressed: () async {
+              Get.back();
+            },
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(greenColor),
+            ),
+            child: Text(
+              'حسنا',
+              style: TextStyle(
+                  fontSize: 20, fontFamily: 'Cairo', color: whiteColor),
+            ),
+          ));
+      }else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("تسجيل الدخول تم بنجاح ")));
+      }
+      }else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("أنت لست محامي من فضلك سجل بحساب المحامي")));
+      }
+     
+
+    
       print('////////////////////////////////////// DONE');
 
       // Get.defaultDialog(

@@ -7,15 +7,14 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<Home> createState() => _HomeState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   var db = FirebaseFirestore.instance;
@@ -30,62 +29,10 @@ class _HomeScreenState extends State<HomeScreen>
   var de = false;
   bool isLogin = true;
   bool login = false;
-  Future islog() async {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        print('User is currently signed out!');
-        setState(() {
-          isLogin = false;
-        });
-        print(isLogin);
-//       Navigator.pushReplacement(
-// context,MaterialPageRoute(builder: (context) => SingIn()),);
-// Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
-      } else {
-        print('User is signed in!');
-        // setState(() {
-        //   isLogin = true;
-        // });
-
-        print(user.uid);
-        print(isLogin);
-
-        FirebaseFirestore.instance
-            .collection('Users')
-            .doc(user.uid)
-            .get()
-            .then((snapshot) {
-          // Use ds as a snapshot
-          setState(() {
-            data = snapshot.data()!;
-            print('Values from db /////////////////////////////////: ' +
-                data["TypeUser"]);
-          });
-
-          if (data["TypeUser"] == "etudiant") {
-            print('etudiant');
-            setState(() {
-              de = true;
-            });
-            Get.back();
-          } else {
-            print('ensignant');
-            setState(() {
-              de = false;
-            });
-            Get.back();
-          }
-
-          // print('Values from db /////////////////////////////////: ' + data["TypeUser"]);
-        });
-      }
-    });
-  }
 
   @override
   void initState() {
     // print(user);
-    islog();
     super.initState();
   }
 
@@ -119,12 +66,6 @@ class _HomeScreenState extends State<HomeScreen>
     });
   }
 
-  final screens = [
-    Test(),
-    Test(),
-    Test(),
-    Test(),
-  ];
   static const IconData subscriptions =
       IconData(0xe618, fontFamily: 'MaterialIcons');
 
@@ -178,80 +119,80 @@ class _HomeScreenState extends State<HomeScreen>
 
       // body: screens[_selectedIndex],
       body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
             Container(
               decoration: BoxDecoration(
                   // color: Colors.black
                   ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 150,
-                    height: 200,
-                    decoration: BoxDecoration(
-                        border: Border(),
-                        color: goldenColor,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15),
-                        )),
-                    child: Column(children: [
-                      SizedBox(
-                        height: 90,
-                        width: 90,
-                        child: Image.asset(
-                          "assets/images/lawyer.png",
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(color: goldenColor),
-                        child: Column(
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                MainFunctions.textDirection = TextDirection.rtl;
-                                Get.forceAppUpdate();
-                                Get.toNamed("/avocatLogin");
-                              },
-                              child: Text(
-                                "   هل أنت محامي ؟",
-                                style:
-                                    TextStyle(color: whiteColor, fontSize: 18),
-                              ),
-                              style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(goldenColor)),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                MainFunctions.textDirection = TextDirection.rtl;
-                                Get.forceAppUpdate();
-                                Get.toNamed("/avocatLogin");
-                              },
-                              child: Text(
-                                "انضم إلينا",
-                                style:
-                                    TextStyle(color: whiteColor, fontSize: 18),
-                              ),
-                              style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(greenColor)),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ]),
-                  )
-                ],
-              ),
+              // child: Column(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   crossAxisAlignment: CrossAxisAlignment.center,
+              //   children: [
+              //     Container(
+              //       width: 160,
+              //       height: 200,
+              //       decoration: BoxDecoration(
+              //           border: Border(),
+              //           color: goldenColor,
+              //           borderRadius: BorderRadius.all(
+              //             Radius.circular(15),
+              //           )),
+              //       child: Column(children: [
+              //         SizedBox(
+              //           height: 90,
+              //           width: 90,
+              //           child: Image.asset(
+              //             "assets/images/lawyer.png",
+              //             fit: BoxFit.cover,
+              //           ),
+              //         ),
+              //         Container(
+              //           decoration: BoxDecoration(color: goldenColor),
+              //           child: Column(
+              //             children: [
+              //               TextButton(
+              //                 onPressed: () {
+              //                   MainFunctions.textDirection = TextDirection.rtl;
+              //                   Get.forceAppUpdate();
+              //                   Get.toNamed("/avocatLogin");
+              //                 },
+              //                 child: Text(
+              //                   "   هل أنت محامي ؟",
+              //                   style:
+              //                       TextStyle(color: whiteColor, fontSize: 18),
+              //                 ),
+              //                 style: ButtonStyle(
+              //                     backgroundColor:
+              //                         MaterialStateProperty.all(goldenColor)),
+              //               ),
+              //               TextButton(
+              //                 onPressed: () {
+              //                   MainFunctions.textDirection = TextDirection.rtl;
+              //                   Get.forceAppUpdate();
+              //                   Get.toNamed("/avocatLogin");
+              //                 },
+              //                 child: Text(
+              //                   "انضم إلينا",
+              //                   style:
+              //                       TextStyle(color: whiteColor, fontSize: 18),
+              //                 ),
+              //                 style: ButtonStyle(
+              //                     backgroundColor:
+              //                         MaterialStateProperty.all(greenColor)),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       ]),
+              //     )
+              //   ],
+              // ),
             ),
             const SizedBox(
-              width: 4,
+              width: 20,
             ),
             // IconButton(onPressed: (){}, icon: Icon()),
             // TextButton.icon(
@@ -270,60 +211,72 @@ class _HomeScreenState extends State<HomeScreen>
 
             //     ),
 
-
-
-
-  Container(
-
+            Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    width: 190,
-                    height: 200,
+                    // width: 200,
+                    // height: 200,
                     decoration: BoxDecoration(
                         border: Border(),
-                        color: goldenColor,
+                        // color: goldenColor,
                         borderRadius: BorderRadius.all(
                           Radius.circular(15),
                         )),
                     child: Column(children: [
-                      SizedBox(
-                        height: 90,
-                        width: 90,
-                        child: Image.asset(
-                          "assets/images/justice-icon-5.png",
-                          fit: BoxFit.cover,
+                      Container(
+                        decoration: BoxDecoration(
+                            border: Border(),
+                            color: goldenColor,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15),
+                            )),
+                        child: SizedBox(
+                          height: 180,
+                          width: 180,
+                          child: Image.asset(
+                            "assets/images/ic_launcher.jpg",
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       Container(
-                        decoration: BoxDecoration(color: goldenColor),
+                        // decoration: BoxDecoration(color: goldenColor),
                         child: Column(
                           children: [
-                            TextButton(
-                              onPressed: () {
-                                MainFunctions.textDirection = TextDirection.rtl;
-                                Get.forceAppUpdate();
-                       Get.toNamed("/clientLogin");
-                              },
+                            //       TextButton(
+                            //         onPressed: () {
+                            //           MainFunctions.textDirection = TextDirection.rtl;
+                            //           Get.forceAppUpdate();
+                            //  Get.toNamed("/clientLogin");
+                            //         },
+                            //         child: Text(
+                            //                "هل تبحث عن محامي ؟",
+                            //           style:
+                            //               TextStyle(color: whiteColor, fontSize: 18),
+                            //         ),
+                            //         style: ButtonStyle(
+                            //             backgroundColor:
+                            //                 MaterialStateProperty.all(goldenColor)),
+                            //       ),
+
+                            Padding(
+                              padding: const EdgeInsets.all(20),
                               child: Text(
-                                     "هل تبحث عن محامي ؟",
-                                style:
-                                    TextStyle(color: whiteColor, fontSize: 18),
+                                "هذا التطبيق عبارة عن وسيط إلكتروني بين المحامي والاشخاص الباحثين عن محامي ، سنقدم لك سيدي الباحث عن محامي خدمة إلكترونية من خلال التوسط بينك وبين محامي يتكفل بقضيتك بطريقة سهلة وسريعة تقضي على عبئ المسافة وطول الوقت .",
+                                style: TextStyle(fontSize: 16),
                               ),
-                              style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(goldenColor)),
                             ),
                             TextButton(
                               onPressed: () {
                                 MainFunctions.textDirection = TextDirection.rtl;
                                 Get.forceAppUpdate();
-                                Get.toNamed("/clientLogin");
+                                Get.offAllNamed("/home");
                               },
                               child: Text(
-                                "سنساعدك  ",
+                                " واصل ",
                                 style:
                                     TextStyle(color: whiteColor, fontSize: 18),
                               ),
@@ -339,13 +292,6 @@ class _HomeScreenState extends State<HomeScreen>
                 ],
               ),
             ),
-           
-
-
-
-
-
-
 
             // TextButton(
             //   onPressed: () {
@@ -362,10 +308,7 @@ class _HomeScreenState extends State<HomeScreen>
             //     // animationDuration: Duration(microseconds: 15),
             //   ),
             // ),
-         
-          ],
-        ),
-      ),
+          ])),
     );
   }
 }

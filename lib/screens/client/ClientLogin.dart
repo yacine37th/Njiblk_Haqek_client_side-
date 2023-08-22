@@ -63,7 +63,7 @@ class _ClientLoginState extends State<ClientLogin> {
   Route route = MaterialPageRoute(builder: (context) => HomeScreen());
 
   Future signInAUser() async {
-    Get.defaultDialog(
+     Get.defaultDialog(
         onWillPop: () {
           return Future.value();
         },
@@ -81,9 +81,9 @@ class _ClientLoginState extends State<ClientLogin> {
       //   MaterialPageRoute(builder: (context) => HomeScreen()),
       // );
       Get.back();
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Login avec success")));
-      Navigator.pushReplacement(context, route);
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("تسجيل الدخول تم بنجاح ")));
+      // Navigator.pushReplacement(context, route);
 
       print('////////////////////////////////////// DONE');
 
@@ -289,7 +289,7 @@ class _ClientLoginState extends State<ClientLogin> {
                               Get.forceAppUpdate();
                               Get.toNamed("/clientRegister");
                               // Navigator.push(
-                              //   context, 
+                              //   context,
                               //   MaterialPageRoute(
                               //       builder: (context) => SignUp()),
                               // );
