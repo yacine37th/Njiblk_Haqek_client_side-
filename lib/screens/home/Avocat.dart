@@ -80,7 +80,7 @@ class _AvocatState extends State<Avocat> {
           if (data["userType"] == "محامي" && data["isAccepted?"] == true) {
             // MainFunctions.textDirection = TextDirection.rtl;
             // Get.forceAppUpdate();
-            Get.offAllNamed("/avocatHome" , arguments:  data);
+            Get.offAllNamed("/avocatAvoc" , arguments:  data);
           } else {
             Lougout();
           }
@@ -144,12 +144,12 @@ class _AvocatState extends State<Avocat> {
           .get()
           .then((snapshot) {
         // Use ds as a snapshot
-
-        if (data["userType"] == "محامي") {
-          setState(() {
+  setState(() {
             data = snapshot.data()!;
             isVerified = data["isAccepted?"];
           });
+        if (data["userType"] == "محامي") {
+        
 
           if (isVerified == false) {
             Get.defaultDialog(
@@ -173,7 +173,7 @@ class _AvocatState extends State<Avocat> {
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text("تسجيل الدخول تم بنجاح ")));
-            Get.offAllNamed("/avocatHome");
+            Get.offAllNamed("/avocatAvoc");
           }
         } else {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(

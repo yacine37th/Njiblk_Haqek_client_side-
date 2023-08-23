@@ -72,145 +72,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('الصفحة الرئيسية'),
-      //   backgroundColor: greenColor,
-      // ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   type: BottomNavigationBarType.fixed,
-      //   // selectedIconTheme:  IconThemeData(
-      //   //   color:  Color.fromRGBO(32, 48, 61, 1),
-
-      //   // ),
-
-      //   // unselectedIconTheme: IconThemeData(
-      //   //   color:  Colors.blackS
-
-      //   // ),
-      //   // selectedIconTheme: IconThemeData(color: Colors.red),
-      //   items: const <BottomNavigationBarItem>[
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.home),
-      //       label: "الرئيسية",
-      //       // backgroundColor: Colors.blue,
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.document_scanner),
-      //       label: "الرئيسية",
-      //       // backgroundColor: Colors.green,
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.table_chart),
-      //       label: "الرئيسية",
-      //       // backgroundColor: Colors.purple,
-      //     ),
-      //     BottomNavigationBarItem(
-      //       // icon: Icon(Icons.settings),
-      //       // label: 'Settings',
-      //       icon: Icon(Icons.person_2),
-      //       label: "حسابي",
-      //       // backgroundColor: Colors.pink,
-      //     ),
-      //   ],
-      //   currentIndex: _selectedIndex,
-      //   selectedItemColor: Colors.blue,
-      //   onTap: _onItemTapped,
-      // ),
-
-      // body: screens[_selectedIndex],
       body: Center(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
             Container(
-              decoration: BoxDecoration(
-                  // color: Colors.black
-                  ),
-              // child: Column(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   children: [
-              //     Container(
-              //       width: 160,
-              //       height: 200,
-              //       decoration: BoxDecoration(
-              //           border: Border(),
-              //           color: goldenColor,
-              //           borderRadius: BorderRadius.all(
-              //             Radius.circular(15),
-              //           )),
-              //       child: Column(children: [
-              //         SizedBox(
-              //           height: 90,
-              //           width: 90,
-              //           child: Image.asset(
-              //             "assets/images/lawyer.png",
-              //             fit: BoxFit.cover,
-              //           ),
-              //         ),
-              //         Container(
-              //           decoration: BoxDecoration(color: goldenColor),
-              //           child: Column(
-              //             children: [
-              //               TextButton(
-              //                 onPressed: () {
-              //                   MainFunctions.textDirection = TextDirection.rtl;
-              //                   Get.forceAppUpdate();
-              //                   Get.toNamed("/avocatLogin");
-              //                 },
-              //                 child: Text(
-              //                   "   هل أنت محامي ؟",
-              //                   style:
-              //                       TextStyle(color: whiteColor, fontSize: 18),
-              //                 ),
-              //                 style: ButtonStyle(
-              //                     backgroundColor:
-              //                         MaterialStateProperty.all(goldenColor)),
-              //               ),
-              //               TextButton(
-              //                 onPressed: () {
-              //                   MainFunctions.textDirection = TextDirection.rtl;
-              //                   Get.forceAppUpdate();
-              //                   Get.toNamed("/avocatLogin");
-              //                 },
-              //                 child: Text(
-              //                   "انضم إلينا",
-              //                   style:
-              //                       TextStyle(color: whiteColor, fontSize: 18),
-              //                 ),
-              //                 style: ButtonStyle(
-              //                     backgroundColor:
-              //                         MaterialStateProperty.all(greenColor)),
-              //               ),
-              //             ],
-              //           ),
-              //         ),
-              //       ]),
-              //     )
-              //   ],
-              // ),
+              decoration: BoxDecoration(),
             ),
             const SizedBox(
               width: 20,
             ),
-            // IconButton(onPressed: (){}, icon: Icon()),
-            // TextButton.icon(
-            //     style: ButtonStyle(
-            //         backgroundColor:
-            //             MaterialStateProperty.all(goldenColor),
-            //         iconColor: MaterialStateProperty.all(whiteColor),
-            //         foregroundColor:
-            //             MaterialStateProperty.all(goldenColor)),
-            //     onPressed: () {},
-            //     icon: const Text(                "هل تبحث عن محامي ",
-
-            //         style: TextStyle(fontWeight: FontWeight.bold , color: whiteColor)),
-
-            //     label: const Icon(Icons.arrow_back_ios_new )
-
-            //     ),
-
             Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -243,25 +115,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         ),
                       ),
                       Container(
-                        // decoration: BoxDecoration(color: goldenColor),
                         child: Column(
                           children: [
-                            //       TextButton(
-                            //         onPressed: () {
-                            //           MainFunctions.textDirection = TextDirection.rtl;
-                            //           Get.forceAppUpdate();
-                            //  Get.toNamed("/clientLogin");
-                            //         },
-                            //         child: Text(
-                            //                "هل تبحث عن محامي ؟",
-                            //           style:
-                            //               TextStyle(color: whiteColor, fontSize: 18),
-                            //         ),
-                            //         style: ButtonStyle(
-                            //             backgroundColor:
-                            //                 MaterialStateProperty.all(goldenColor)),
-                            //       ),
-
                             Padding(
                               padding: const EdgeInsets.all(20),
                               child: Text(
@@ -292,22 +147,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 ],
               ),
             ),
-
-            // TextButton(
-            //   onPressed: () {
-            //     MainFunctions.textDirection = TextDirection.rtl;
-            //     Get.forceAppUpdate();
-            //     Get.toNamed("/clientLogin");
-            //   },
-            //   child: Text(
-            //     "هل تبحث عن محامي ",
-            //     style: TextStyle(color: whiteColor, fontSize: 18),
-            //   ),
-            //   style: ButtonStyle(
-            //     backgroundColor: MaterialStateProperty.all(goldenColor),
-            //     // animationDuration: Duration(microseconds: 15),
-            //   ),
-            // ),
           ])),
     );
   }

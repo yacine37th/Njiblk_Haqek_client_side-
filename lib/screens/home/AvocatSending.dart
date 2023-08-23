@@ -4,14 +4,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AvocatHomeScreen extends StatefulWidget {
-  const AvocatHomeScreen({super.key});
+class AvocatSending extends StatefulWidget {
+  const AvocatSending({super.key});
 
   @override
-  State<AvocatHomeScreen> createState() => _AvocatHomeScreenState();
+  State<AvocatSending> createState() => _AvocatSendingState();
 }
 
-class _AvocatHomeScreenState extends State<AvocatHomeScreen> {
+class _AvocatSendingState extends State<AvocatSending> {
   var currentUser;
   var user;
   @override
@@ -36,7 +36,7 @@ class _AvocatHomeScreenState extends State<AvocatHomeScreen> {
   // var userID =   Get.arguments['userID'] ;
   var test = "dededed";
   final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
-      .collection('issues')
+      .collection('sendingtoLawyer')
 // user.uid?
       .where('lawyerID', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
       // .where('lawyerID', isEqualTo:true )
@@ -56,7 +56,7 @@ class _AvocatHomeScreenState extends State<AvocatHomeScreen> {
     return Scaffold(
       appBar: AppBar(
         // ذ
-        title: Text('قائمة الأشخاص   '),
+        title: Text('قائمة الأشخاص المحولين من طرف الأدمين  '),
         backgroundColor: goldenColor,
         actions: <Widget>[
           IconButton(
@@ -84,7 +84,7 @@ class _AvocatHomeScreenState extends State<AvocatHomeScreen> {
                 return Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       CircularProgressIndicator(
                         backgroundColor: goldenColor,
@@ -129,7 +129,7 @@ class _AvocatHomeScreenState extends State<AvocatHomeScreen> {
                       child: ListTile(
                         trailing: Icon(Icons.arrow_back_outlined),
                         onTap: () {
-                          Get.toNamed("/person", arguments: data);
+                          Get.toNamed("/avocatSendingDetails", arguments: data);
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(
@@ -155,8 +155,8 @@ class _AvocatHomeScreenState extends State<AvocatHomeScreen> {
                           //   print('DOWNLOAD ERROR: $error');
                           // });
                         },
-                        title: Text("شخص أرسل طلب من أجل  التواصل"),
-                        // subtitle: Text(data["userID"]),
+                        title: Text(data["userName"]),
+                        subtitle: Text(data["userEmail"]),
                       ),
                     ),
                   );

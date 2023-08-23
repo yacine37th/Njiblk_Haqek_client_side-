@@ -49,49 +49,46 @@ class _ClientLoginState extends State<ClientLogin> {
   var data2;
   User? currentUser = FirebaseAuth.instance.currentUser;
   var id;
-   var currentUser2 ;
+  var currentUser2;
 
   var de;
 
-Future Lougout()async {
-      await FirebaseAuth.instance.signOut();
-}
-
+  Future Lougout() async {
+    await FirebaseAuth.instance.signOut();
+  }
 
   @override
   void initState() {
     super.initState();
     // _controller = AnimationController(vsync: this);
     invertShowPassword();
-   setState(() {
-       currentUser2 = FirebaseAuth.instance.currentUser;
-   });
-    // print(currentUser!.uid);
-    if(currentUser2==null){
-      print("no user");
-    }else {
-        FirebaseFirestore.instance
-        .collection('users')
-        .doc(currentUser2!.uid)
-        .get()
-        .then((snapshot) {
-      // Use ds as a snapshot
-      setState(() {
-        data = snapshot.data()!;
-        print('Values from db /////////////////////////////////: ' +
-            data["userType"]);
-        if (data["userType"] == "باحث محام") {
-          MainFunctions.textDirection = TextDirection.rtl;
-          Get.forceAppUpdate();
-          Get.offAllNamed("/clientHome");
-        }else {
-          Lougout();
-        }
-      });
+    setState(() {
+      currentUser2 = FirebaseAuth.instance.currentUser;
     });
- 
+    // print(currentUser!.uid);
+    if (currentUser2 == null) {
+      print("no user");
+    } else {
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser2!.uid)
+          .get()
+          .then((snapshot) {
+        // Use ds as a snapshot
+        setState(() {
+          data = snapshot.data()!;
+          print('Values from db /////////////////////////////////: ' +
+              data["userType"]);
+          if (data["userType"] == "باحث محام") {
+            MainFunctions.textDirection = TextDirection.rtl;
+            Get.forceAppUpdate();
+            Get.offAllNamed("/clientHome");
+          } else {
+            Lougout();
+          }
+        });
+      });
     }
-  
   }
 
   @override
@@ -137,28 +134,27 @@ Future Lougout()async {
           data = snapshot.data()!["userType"];
           // print('Values from db /////////////////////////////////: ' +
           //     data["TypeUser"]);
-     
+
           //  user = snapshot.data()!;
         });
-
+        if (data == "باحث محام") {
+          MainFunctions.textDirection = TextDirection.rtl;
+          Get.forceAppUpdate();
+          Get.offAllNamed("/clientHome");
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: const Text(
+                  "هذا الحساب مسجل كحساب محامي من فضلك سجل بحساب آخر !!!")));
+          FirebaseAuth.instance.signOut();
+        }
         // print('Values from db /////////////////////////////////: ' + data["TypeUser"]);
       });
       Get.back();
-           if (data== "باحث محام") {
-            isnotLawyer = true;
-          }
+
       print("/////////////////// ${isnotLawyer}");
       print(isnotLawyer);
       if (isnotLawyer) {
-        MainFunctions.textDirection = TextDirection.rtl;
-        Get.forceAppUpdate();
-        Get.offAllNamed("/clientHome");
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text(
-                "هذا الحساب مسجل كحساب محامي من فضلك سجل بحساب آخر !!!")));
-        await FirebaseAuth.instance.signOut();
-      }
+      } else {}
 
       print('////////////////////////////////////// DONE');
 

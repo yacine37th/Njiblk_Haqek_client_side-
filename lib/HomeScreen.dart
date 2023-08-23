@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen>
         print(isLogin);
 
         FirebaseFirestore.instance
-            .collection('Users')
+            .collection('users')
             .doc(user.uid)
             .get()
             .then((snapshot) {
@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     // print(user);
-    islog();
+    // islog();
     super.initState();
   }
 

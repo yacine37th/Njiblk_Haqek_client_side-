@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:avocat/Home.dart';
 import 'package:avocat/HomeScreen.dart';
 import 'package:avocat/firebase_options.dart';
-import 'package:avocat/screens/SingIn.dart';
-import 'package:avocat/screens/SingUp.dart';
 import 'package:avocat/screens/client/ClientHomeScreen.dart';
 import 'package:avocat/screens/client/FindLawyer.dart';
 import 'package:avocat/screens/client/IssuesForm.dart';
@@ -15,6 +13,10 @@ import 'package:avocat/screens/client/ClientLogin.dart';
 import 'package:avocat/screens/client/ClientRegistration.dart';
 import 'package:avocat/screens/home/Avocat.dart';
 import 'package:avocat/screens/home/AvocatRegister.dart';
+import 'package:avocat/screens/home/AvocatSending.dart';
+import 'package:avocat/screens/home/AvocatSendingDetails.dart';
+import 'package:avocat/screens/home/HomeAvoc.dart';
+import 'package:avocat/screens/home/Personsdetails.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -86,7 +88,7 @@ class _MyAppState extends State<MyApp> {
       //     //     ? HomeEtudiant()
       //     //     : HomeEnsi()
       //     : SingIn(),
-      initialRoute: "/avocatHome",
+      initialRoute: "/home",
       getPages: [
         GetPage(
           name: "/homee",
@@ -100,6 +102,20 @@ class _MyAppState extends State<MyApp> {
           name: "/avocatHome",
           page: () => const AvocatHomeScreen(),
         ),
+
+
+
+         GetPage(
+          name: "/avocatAvoc",
+          page: () => const HomeAvoc(),
+        ),
+
+
+         GetPage(
+          name: "/avocatSendingDetails",
+          page: () => const AvocatSendingDetails(),
+        ),
+        
           GetPage(
           name: "/avocatLogin",
           page: () => const Avocat(),
@@ -112,6 +128,13 @@ class _MyAppState extends State<MyApp> {
           name: "/avocatRegisterInfo",
           page: () => const AvocatRegisterInfo(),
         ),
+
+
+GetPage(
+          name: "/person",
+          page: () => const PersonDetails(),
+        ),
+
         GetPage(
           name: "/clientLogin",
           page: () => const ClientLogin(),

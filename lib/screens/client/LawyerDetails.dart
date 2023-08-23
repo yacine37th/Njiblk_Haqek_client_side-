@@ -16,7 +16,7 @@ class LawyerDetails extends StatefulWidget {
 class _LawyerDetailsState extends State<LawyerDetails> {
   bool isLogin = false;
   var data;
-      var lawyerid;
+  var lawyerid;
   @override
   void initState() {
     super.initState();
@@ -39,6 +39,7 @@ class _LawyerDetailsState extends State<LawyerDetails> {
   }
 
   var db = FirebaseFirestore.instance;
+  var userNAme;
   Future sendRequest() async {
     Get.defaultDialog(
         onWillPop: () {
@@ -50,21 +51,26 @@ class _LawyerDetailsState extends State<LawyerDetails> {
           backgroundColor: goldenColor,
         ));
     try {
-  
       // print();
       print("/////////bef");
       print(lawyerid);
       var doc = db.collection("issues").doc();
-      var docClient =
-          db.collection("users").doc(data!.uid);
-                print("/////////bef2");
+      var docClient = db.collection("users").doc(data!.uid);
+      docClient.get().then((snapshot) {
+        setState(() {
+          userNAme = snapshot.data()!;
+        });
+      },);
+      print("/////////bef2");
+      print(userNAme);
       docClient.update({
         "issuesID": FieldValue.arrayUnion([doc.id]),
       });
-            print("/////////bef3");
+      print("/////////bef3");
       doc.set({
+        // "userName" :userNAme,
         "userID": docClient.id,
-        "lawyerID":lawyerid,
+        "lawyerID": lawyerid,
       });
       // FirebaseFirestore.instance.collection("issues").doc().set({
       //   "lawyerID": Get.arguments["userID"],
@@ -77,7 +83,7 @@ class _LawyerDetailsState extends State<LawyerDetails> {
 
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: const Text("تم حفظ طلبك بنجاح إنتظر رد المحامي ")));
-Get.back();
+      Get.back();
       print('////////////////////////////////////// DONE');
     } catch (e) {
       print(e);
@@ -94,18 +100,16 @@ Get.back();
     }
   }
 
+  Future tee() async {
+    print(Get.arguments['userID']);
+  }
 
-
-Future tee()async {
-  print(Get.arguments['userID']);
-}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("معلومات المحامي "),
         backgroundColor: goldenColor,
-         
       ),
       body: Center(
         child: Column(
@@ -113,18 +117,18 @@ Future tee()async {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // UrlLauncher.launch('mailto:${p.email}'),
-             Text(" إسم المحامي : ${Get.arguments["userName"]} ",
+            Text(" إسم المحامي : ${Get.arguments["userName"]} ",
                 style: TextStyle(fontSize: 18)),
             TextButton(
-              onPressed: (){
+              onPressed: () {
                 UrlLauncher.launch('mailto:${Get.arguments["userEmail"]}');
               },
               child: Text(
                 "  البريد الإلكتروني  :${Get.arguments["userEmail"]}",
-                style:TextStyle(fontSize: 18, color: greenColor),
+                style: TextStyle(fontSize: 18, color: greenColor),
               ),
             ),
-           
+
             // Text(" رقم هاتف المحامي : ${Get.arguments["userPhoneNumber"]} ",
             //     style: TextStyle(fontSize: 18)),
 
@@ -146,7 +150,7 @@ Future tee()async {
             ),
             TextButton(
                 onPressed: () {
-                //  tee();
+                  //  tee();
                   sendRequest();
                 },
                 style: ButtonStyle(

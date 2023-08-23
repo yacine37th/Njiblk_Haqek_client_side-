@@ -4,14 +4,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AvocatHomeScreen extends StatefulWidget {
-  const AvocatHomeScreen({super.key});
+class SendingFromAdmin extends StatefulWidget {
+  const SendingFromAdmin({super.key});
 
   @override
-  State<AvocatHomeScreen> createState() => _AvocatHomeScreenState();
+  State<SendingFromAdmin> createState() => _SendingFromAdminState();
 }
 
-class _AvocatHomeScreenState extends State<AvocatHomeScreen> {
+class _SendingFromAdminState extends State<SendingFromAdmin> {
   var currentUser;
   var user;
   @override
@@ -36,7 +36,7 @@ class _AvocatHomeScreenState extends State<AvocatHomeScreen> {
   // var userID =   Get.arguments['userID'] ;
   var test = "dededed";
   final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
-      .collection('issues')
+      .collection('adminissue')
 // user.uid?
       .where('lawyerID', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
       // .where('lawyerID', isEqualTo:true )
