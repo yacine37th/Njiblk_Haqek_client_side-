@@ -162,6 +162,8 @@ class _ClientRegistrationState extends State<ClientRegistration> {
         // "userWilaya": _selectedLocation,
         "userPhoneNumber": phone.text,
         "isAccepted?": true,
+        "issuesID": [],
+        "issueAdminID": [],
         // "userCV" : "",
       });
       Get.back();
@@ -169,6 +171,7 @@ class _ClientRegistrationState extends State<ClientRegistration> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content:
               Text("تم التسجيل بشكل جيد للغاية ، والآن يرجى تسجيل الدخول  ")));
+               await FirebaseAuth.instance.signOut();
       Get.back();
     } on FirebaseAuthException catch (e) {
       Get.back();

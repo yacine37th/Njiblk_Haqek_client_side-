@@ -45,11 +45,48 @@ class _AvocatState extends State<Avocat> {
     });
   }
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // _controller = AnimationController(vsync: this);
+  //   invertShowPassword();
+  // }
+  Future Lougout() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
+  var currentUser;
   @override
   void initState() {
     super.initState();
     // _controller = AnimationController(vsync: this);
     invertShowPassword();
+    setState(() {
+      currentUser = FirebaseAuth.instance.currentUser;
+    });
+    // print(currentUser!.uid);
+    if (currentUser == null) {
+    } else {
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser.uid)
+          .get()
+          .then((snapshot) {
+        // Use ds as a snapshot
+        setState(() {
+          data = snapshot.data()!;
+          print('Values from db /////////////////////////////////: ' +
+              data["userType"]);
+          if (data["userType"] == "محامي" && data["isAccepted?"] == true) {
+            // MainFunctions.textDirection = TextDirection.rtl;
+            // Get.forceAppUpdate();
+            Get.offAllNamed("/avocatHome" , arguments:  data);
+          } else {
+            Lougout();
+          }
+        });
+      });
+    }
   }
 
   @override
@@ -62,7 +99,7 @@ class _AvocatState extends State<Avocat> {
   var db = FirebaseFirestore.instance;
   Route route = MaterialPageRoute(builder: (context) => HomeScreen());
   bool isVerified = false;
-    bool islawyer = false;
+  bool islawyer = false;
 
   var data;
 
@@ -84,75 +121,72 @@ class _AvocatState extends State<Avocat> {
       //   context,
       //   MaterialPageRoute(builder: (context) => HomeScreen()),
       // );
-        //    FirebaseFirestore.instance
-        //     .collection('users')
-        //     .doc(credential.)
-        //     .get()
-        //     .then((snapshot) {
-        //   // Use ds as a snapshot
-        //   setState(() {
-        //     usercurrent = snapshot.data()!;
-        //     // print('Values from db /////////////////////////////////: ' +
-        //     //     data["TypeUser"]);
-        //     //  user = snapshot.data()!;
-        //   });
+      //    FirebaseFirestore.instance
+      //     .collection('users')
+      //     .doc(credential.)
+      //     .get()
+      //     .then((snapshot) {
+      //   // Use ds as a snapshot
+      //   setState(() {
+      //     usercurrent = snapshot.data()!;
+      //     // print('Values from db /////////////////////////////////: ' +
+      //     //     data["TypeUser"]);
+      //     //  user = snapshot.data()!;
+      //   });
 
-        //   // print('Values from db /////////////////////////////////: ' + data["TypeUser"]);
-        // });
-         print(" //////////////////////////// credential");
-   print(credential.user!.uid!);
-     FirebaseFirestore.instance
-            .collection('users')
-            .doc(credential.user!.uid!)
-            .get()
-            .then((snapshot) {
-          // Use ds as a snapshot
+      //   // print('Values from db /////////////////////////////////: ' + data["TypeUser"]);
+      // });
+      print(" //////////////////////////// credential");
+      print(credential.user!.uid);
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(credential.user!.uid)
+          .get()
+          .then((snapshot) {
+        // Use ds as a snapshot
+
+        if (data["userType"] == "محامي") {
           setState(() {
-            data= snapshot.data()!;
-            // print('Values from db /////////////////////////////////: ' +
-            //     data["TypeUser"]);
+            data = snapshot.data()!;
             isVerified = data["isAccepted?"];
-            if(data["userType"] == "محامي"){
-                          islawyer= true; 
-            }
-            //  user = snapshot.data()!;
           });
 
-          // print('Values from db /////////////////////////////////: ' + data["TypeUser"]);
-        });
+          if (isVerified == false) {
+            Get.defaultDialog(
+                backgroundColor: goldenColor,
+                barrierDismissible: false,
+                title: "   يرجى الإنتظار حتى يتم قبولك ",
+                titleStyle: TextStyle(color: whiteColor),
+                content: ElevatedButton(
+                  onPressed: () async {
+                    Get.back();
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(greenColor),
+                  ),
+                  child: Text(
+                    'حسنا',
+                    style: TextStyle(
+                        fontSize: 20, fontFamily: 'Cairo', color: whiteColor),
+                  ),
+                ));
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("تسجيل الدخول تم بنجاح ")));
+            Get.offAllNamed("/avocatHome");
+          }
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text("أنت لست محامي من فضلك سجل بحساب المحامي")));
+        }
+
+        //  user = snapshot.data()!;
+
+        // print('Values from db /////////////////////////////////: ' + data["TypeUser"]);
+      });
       print(isVerified);
       Get.back();
-      if(islawyer){
-         if(isVerified ==false ){
-          Get.defaultDialog(
-          backgroundColor: goldenColor,
-          barrierDismissible: false,
-          title: "   يرجى الإنتظار حتى يتم قبولك ",
-          titleStyle: TextStyle(color: whiteColor),
-          content: ElevatedButton(
-            onPressed: () async {
-              Get.back();
-            },
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(greenColor),
-            ),
-            child: Text(
-              'حسنا',
-              style: TextStyle(
-                  fontSize: 20, fontFamily: 'Cairo', color: whiteColor),
-            ),
-          ));
-      }else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("تسجيل الدخول تم بنجاح ")));
-      }
-      }else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("أنت لست محامي من فضلك سجل بحساب المحامي")));
-      }
-     
 
-    
       print('////////////////////////////////////// DONE');
 
       // Get.defaultDialog(

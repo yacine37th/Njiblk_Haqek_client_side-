@@ -191,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen>
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    width: 150,
+                    width: 160,
                     height: 200,
                     decoration: BoxDecoration(
                         border: Border(),

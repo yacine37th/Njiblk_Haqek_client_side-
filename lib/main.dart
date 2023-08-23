@@ -5,6 +5,11 @@ import 'package:avocat/HomeScreen.dart';
 import 'package:avocat/firebase_options.dart';
 import 'package:avocat/screens/SingIn.dart';
 import 'package:avocat/screens/SingUp.dart';
+import 'package:avocat/screens/client/ClientHomeScreen.dart';
+import 'package:avocat/screens/client/FindLawyer.dart';
+import 'package:avocat/screens/client/IssuesForm.dart';
+import 'package:avocat/screens/client/LawyerDetails.dart';
+import 'package:avocat/screens/home/AvocatHomeScreen.dart';
 import 'package:avocat/screens/home/AvocatRegisterInfo.dart';
 import 'package:avocat/screens/client/ClientLogin.dart';
 import 'package:avocat/screens/client/ClientRegistration.dart';
@@ -81,7 +86,7 @@ class _MyAppState extends State<MyApp> {
       //     //     ? HomeEtudiant()
       //     //     : HomeEnsi()
       //     : SingIn(),
-      initialRoute: "/home",
+      initialRoute: "/avocatHome",
       getPages: [
         GetPage(
           name: "/homee",
@@ -90,6 +95,10 @@ class _MyAppState extends State<MyApp> {
         GetPage(
           name: "/home",
           page: () => const HomeScreen(),
+        ),
+        GetPage(
+          name: "/avocatHome",
+          page: () => const AvocatHomeScreen(),
         ),
           GetPage(
           name: "/avocatLogin",
@@ -108,17 +117,30 @@ class _MyAppState extends State<MyApp> {
           page: () => const ClientLogin(),
         ),
           GetPage(
-          name: "/clientRegister",
+          name: "/clientRegister", 
           page: () => const ClientRegistration(),
         ),
-        GetPage(
-          name: "/register",
-          page: () => const SignUp(),
+         GetPage(
+          name: "/clientHome",
+          page: () => const ClientHomeScreen(),
+        ),
+         GetPage(
+          name: "/issuesForm",
+          page: () => const IssuesForm(),
         ),
         GetPage(
-          name: "/login",
-          page: () => const SingIn(),
+          name: "/findLawyer",
+          page: () => const FindLawyer(),
         ),
+        GetPage(name: "/lawyerDetails", page: ()=>  LawyerDetails())
+        // GetPage(
+        //   name: "/register",
+        //   page: () => const SignUp(),
+        // ),
+        // GetPage(
+        //   name: "/login",
+        //   page: () => const SingIn(),
+        // ),
       ],
       // initialRoute:  isLogin ? "/home" : "/login"
       // initialRoute: isLogin ? "/home" :

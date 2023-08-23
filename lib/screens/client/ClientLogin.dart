@@ -45,11 +45,53 @@ class _ClientLoginState extends State<ClientLogin> {
     });
   }
 
+  bool isLogin = false;
+  var data2;
+  User? currentUser = FirebaseAuth.instance.currentUser;
+  var id;
+   var currentUser2 ;
+
+  var de;
+
+Future Lougout()async {
+      await FirebaseAuth.instance.signOut();
+}
+
+
   @override
   void initState() {
     super.initState();
     // _controller = AnimationController(vsync: this);
     invertShowPassword();
+   setState(() {
+       currentUser2 = FirebaseAuth.instance.currentUser;
+   });
+    // print(currentUser!.uid);
+    if(currentUser2==null){
+      print("no user");
+    }else {
+        FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser2!.uid)
+        .get()
+        .then((snapshot) {
+      // Use ds as a snapshot
+      setState(() {
+        data = snapshot.data()!;
+        print('Values from db /////////////////////////////////: ' +
+            data["userType"]);
+        if (data["userType"] == "باحث محام") {
+          MainFunctions.textDirection = TextDirection.rtl;
+          Get.forceAppUpdate();
+          Get.offAllNamed("/clientHome");
+        }else {
+          Lougout();
+        }
+      });
+    });
+ 
+    }
+  
   }
 
   @override
@@ -59,11 +101,14 @@ class _ClientLoginState extends State<ClientLogin> {
     super.dispose();
   }
 
-  var db = FirebaseFirestore.instance;
   Route route = MaterialPageRoute(builder: (context) => HomeScreen());
+  bool isVerified = false;
+  bool isnotLawyer = false;
 
+  var data;
+  var db = FirebaseFirestore.instance;
   Future signInAUser() async {
-     Get.defaultDialog(
+    Get.defaultDialog(
         onWillPop: () {
           return Future.value();
         },
@@ -80,10 +125,40 @@ class _ClientLoginState extends State<ClientLogin> {
       //   context,
       //   MaterialPageRoute(builder: (context) => HomeScreen()),
       // );
-      Get.back();
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("تسجيل الدخول تم بنجاح ")));
+
       // Navigator.pushReplacement(context, route);
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(credential.user!.uid!)
+          .get()
+          .then((snapshot) {
+        // Use ds as a snapshot
+        setState(() {
+          data = snapshot.data()!["userType"];
+          // print('Values from db /////////////////////////////////: ' +
+          //     data["TypeUser"]);
+     
+          //  user = snapshot.data()!;
+        });
+
+        // print('Values from db /////////////////////////////////: ' + data["TypeUser"]);
+      });
+      Get.back();
+           if (data== "باحث محام") {
+            isnotLawyer = true;
+          }
+      print("/////////////////// ${isnotLawyer}");
+      print(isnotLawyer);
+      if (isnotLawyer) {
+        MainFunctions.textDirection = TextDirection.rtl;
+        Get.forceAppUpdate();
+        Get.offAllNamed("/clientHome");
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: const Text(
+                "هذا الحساب مسجل كحساب محامي من فضلك سجل بحساب آخر !!!")));
+        await FirebaseAuth.instance.signOut();
+      }
 
       print('////////////////////////////////////// DONE');
 
