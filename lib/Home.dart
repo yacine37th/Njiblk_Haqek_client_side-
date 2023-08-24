@@ -106,13 +106,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               Radius.circular(15),
                             )),
                         child: SizedBox(
-                          height: 180,
-                          width: 180,
-                          child: Image.asset(
-                            "assets/images/ic_launcher.jpg",
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                            height: 180,
+                            width: 180,
+                            child: const Image(
+                                image:
+                                    AssetImage('assets/images/ic_launcher.jpg'),
+                                     
+                                    )
+                            //  Image.asset(
+                            //   "assets/images/ic_launcher.jpg",
+                            //   fit: BoxFit.cover,
+                            // ),
+                            ),
                       ),
                       Container(
                         child: Column(
@@ -130,15 +135,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 Get.forceAppUpdate();
                                 Get.offAllNamed("/home");
                               },
-                              child: Text(
+                              child: 
+                              Text(
                                 " واصل ",
                                 style:
                                     TextStyle(color: whiteColor, fontSize: 18),
-                              ),
+                              )
+                              ,
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all(greenColor)),
                             ),
+                      
+                      
                           ],
                         ),
                       ),

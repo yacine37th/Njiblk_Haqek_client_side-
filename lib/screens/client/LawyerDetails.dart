@@ -110,6 +110,13 @@ class _LawyerDetailsState extends State<LawyerDetails> {
       appBar: AppBar(
         title: Text("معلومات المحامي "),
         backgroundColor: goldenColor,
+         leading: IconButton(
+            onPressed: () {
+              navigator!.pop();
+            },
+            icon:
+            Icon(Icons.arrow_back_ios_rounded)
+            ),
       ),
       body: Center(
         child: Column(
@@ -118,6 +125,9 @@ class _LawyerDetailsState extends State<LawyerDetails> {
           children: [
             // UrlLauncher.launch('mailto:${p.email}'),
             Text(" إسم المحامي : ${Get.arguments["userName"]} ",
+                style: TextStyle(fontSize: 18)),
+
+                    Text(" ولاية : ${Get.arguments["userWilaya"]} ",
                 style: TextStyle(fontSize: 18)),
             TextButton(
               onPressed: () {
@@ -145,6 +155,8 @@ class _LawyerDetailsState extends State<LawyerDetails> {
                   " رقم هاتف المحامي : ${Get.arguments["userPhoneNumber"]} ",
                   style: TextStyle(fontSize: 18, color: greenColor)),
             ),
+           
+           
             const SizedBox(
               height: 30,
             ),
@@ -159,9 +171,9 @@ class _LawyerDetailsState extends State<LawyerDetails> {
                   "  إرسال طلب بلاغ للمحامي",
                   style: TextStyle(color: whiteColor, fontSize: 18),
                 )),
-            const SizedBox(
-              height: 10,
-            ),
+            // const SizedBox(
+            //   height: 10,
+            // ),
             // TextButton(
             //     onPressed: () {
             //       Get.defaultDialog(

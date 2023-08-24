@@ -158,6 +158,13 @@ class _IssuesFormState extends State<IssuesForm> {
         elevation: 0,
         backgroundColor: goldenColor,
         title: Text('معلومات المشكلة'),
+          leading: IconButton(
+            onPressed: () {
+              navigator!.pop();
+            },
+            icon:
+            Icon(Icons.arrow_back_ios_rounded)
+            ),
       ),
       body: Center(
         child: SingleChildScrollView(

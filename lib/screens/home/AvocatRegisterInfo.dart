@@ -291,6 +291,13 @@ class _AvoctaRegisteInforState extends State<AvocatRegisterInfo> {
         elevation: 0,
         backgroundColor: goldenColor,
         title: Text(" تحميل السيرة الداتية"),
+         leading: IconButton(
+            onPressed: () {
+              navigator!.pop();
+            },
+            icon:
+            Icon(Icons.arrow_back_ios_rounded)
+            ),
       ),
       body: Center(
         child: SingleChildScrollView(

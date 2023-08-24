@@ -88,7 +88,7 @@ class _MyAppState extends State<MyApp> {
       //     //     ? HomeEtudiant()
       //     //     : HomeEnsi()
       //     : SingIn(),
-      initialRoute: "/home",
+      initialRoute: "/homee",
       getPages: [
         GetPage(
           name: "/homee",

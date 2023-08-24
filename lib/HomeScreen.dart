@@ -30,57 +30,57 @@ class _HomeScreenState extends State<HomeScreen>
   var de = false;
   bool isLogin = true;
   bool login = false;
-  Future islog() async {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        print('User is currently signed out!');
-        setState(() {
-          isLogin = false;
-        });
-        print(isLogin);
-//       Navigator.pushReplacement(
-// context,MaterialPageRoute(builder: (context) => SingIn()),);
-// Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
-      } else {
-        print('User is signed in!');
-        // setState(() {
-        //   isLogin = true;
-        // });
+//   Future islog() async {
+//     FirebaseAuth.instance.authStateChanges().listen((User? user) {
+//       if (user == null) {
+//         print('User is currently signed out!');
+//         setState(() {
+//           isLogin = false;
+//         });
+//         print(isLogin);
+// //       Navigator.pushReplacement(
+// // context,MaterialPageRoute(builder: (context) => SingIn()),);
+// // Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+//       } else {
+//         print('User is signed in!');
+//         // setState(() {
+//         //   isLogin = true;
+//         // });
 
-        print(user.uid);
-        print(isLogin);
+//         print(user.uid);
+//         print(isLogin);
 
-        FirebaseFirestore.instance
-            .collection('users')
-            .doc(user.uid)
-            .get()
-            .then((snapshot) {
-          // Use ds as a snapshot
-          setState(() {
-            data = snapshot.data()!;
-            print('Values from db /////////////////////////////////: ' +
-                data["TypeUser"]);
-          });
+//         FirebaseFirestore.instance
+//             .collection('users')
+//             .doc(user.uid)
+//             .get()
+//             .then((snapshot) {
+//           // Use ds as a snapshot
+//           setState(() {
+//             data = snapshot.data()!;
+//             print('Values from db /////////////////////////////////: ' +
+//                 data["TypeUser"]);
+//           });
 
-          if (data["TypeUser"] == "etudiant") {
-            print('etudiant');
-            setState(() {
-              de = true;
-            });
-            Get.back();
-          } else {
-            print('ensignant');
-            setState(() {
-              de = false;
-            });
-            Get.back();
-          }
+//           if (data["TypeUser"] == "etudiant") {
+//             print('etudiant');
+//             setState(() {
+//               de = true;
+//             });
+//             Get.back();
+//           } else {
+//             print('ensignant');
+//             setState(() {
+//               de = false;
+//             });
+//             Get.back();
+//           }
 
-          // print('Values from db /////////////////////////////////: ' + data["TypeUser"]);
-        });
-      }
-    });
-  }
+//           // print('Values from db /////////////////////////////////: ' + data["TypeUser"]);
+//         });
+//       }
+//     });
+//   }
 
   @override
   void initState() {
@@ -270,11 +270,7 @@ class _HomeScreenState extends State<HomeScreen>
 
             //     ),
 
-
-
-
-  Container(
-
+            Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -305,10 +301,10 @@ class _HomeScreenState extends State<HomeScreen>
                               onPressed: () {
                                 MainFunctions.textDirection = TextDirection.rtl;
                                 Get.forceAppUpdate();
-                       Get.toNamed("/clientLogin");
+                                Get.toNamed("/clientLogin");
                               },
                               child: Text(
-                                     "هل تبحث عن محامي ؟",
+                                "هل تبحث عن محامي ؟",
                                 style:
                                     TextStyle(color: whiteColor, fontSize: 18),
                               ),
@@ -339,31 +335,8 @@ class _HomeScreenState extends State<HomeScreen>
                 ],
               ),
             ),
-           
 
-
-
-
-
-
-
-            // TextButton(
-            //   onPressed: () {
-            //     MainFunctions.textDirection = TextDirection.rtl;
-            //     Get.forceAppUpdate();
-            //     Get.toNamed("/clientLogin");
-            //   },
-            //   child: Text(
-            //     "هل تبحث عن محامي ",
-            //     style: TextStyle(color: whiteColor, fontSize: 18),
-            //   ),
-            //   style: ButtonStyle(
-            //     backgroundColor: MaterialStateProperty.all(goldenColor),
-            //     // animationDuration: Duration(microseconds: 15),
-            //   ),
-            // ),
-         
-          ],
+             ],
         ),
       ),
     );

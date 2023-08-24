@@ -28,6 +28,13 @@ class _AvocatSendingDetailsState extends State<AvocatSendingDetails> {
         // ذ
         title: Text('معلومات الشخص       '),
         backgroundColor: goldenColor,
+        leading: IconButton(
+            onPressed: () {
+              navigator!.pop();
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_rounded,
+            )),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -75,9 +82,7 @@ class _AvocatSendingDetailsState extends State<AvocatSendingDetails> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text("وقائع النزاع : ${Get.arguments['issueContent']}",
-                    style: TextStyle(
-                      fontSize: 18,
-                    )),
+                    style: TextStyle(fontSize: 18, color: greenColor)),
               ),
             ],
           ),

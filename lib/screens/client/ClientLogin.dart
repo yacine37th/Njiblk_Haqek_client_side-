@@ -136,12 +136,15 @@ class _ClientLoginState extends State<ClientLogin> {
           //     data["TypeUser"]);
 
           //  user = snapshot.data()!;
+          print('else ///////////////////////1');
+
         });
         if (data == "باحث محام") {
           MainFunctions.textDirection = TextDirection.rtl;
           Get.forceAppUpdate();
           Get.offAllNamed("/clientHome");
-        } else {
+        } else if (data == "محامي") {
+          print('else ///////////////////////');
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: const Text(
                   "هذا الحساب مسجل كحساب محامي من فضلك سجل بحساب آخر !!!")));
@@ -172,24 +175,52 @@ class _ClientLoginState extends State<ClientLogin> {
       if (e.code == 'user-not-found') {
         Get.defaultDialog(
           title: "حساب غير موجود",
-          content: const Icon(
-            Icons.report_problem,
-            color: Colors.red,
-          ),
-          onConfirm: () {
-            Get.back();
-          },
-        );
+            content: ElevatedButton(
+                  onPressed: () async {
+                    Get.back();
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(greenColor),
+                  ),
+                  child: Text(
+                    'حسنا', 
+                    style: TextStyle(
+                        fontSize: 20, fontFamily: 'Cairo', color: whiteColor),
+                  ),
+                ));
+      
+          // content: const Icon(
+          //   Icons.report_problem,
+          //   color: Colors.red,
+          // ),
+          // onConfirm: () {
+          //   Get.back();
+          // },
+        // );
       } else if (e.code == 'wrong-password') {
         Get.defaultDialog(
           title: "يرجى مراجعة كلمة المرور",
-          content: const Icon(
-            Icons.report_problem,
-            color: Colors.red,
-          ),
-          onConfirm: () {
-            Get.back();
-          },
+          content: ElevatedButton(
+                  onPressed: () async {
+                    Get.back();
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(greenColor),
+                  ),
+                  child: Text(
+                    'حسنا',
+                    style: TextStyle(
+                        fontSize: 20, fontFamily: 'Cairo', color: whiteColor),
+                  ),
+                )
+      
+          // content: const Icon(
+          //   Icons.report_problem,
+          //   color: Colors.red,
+          // ),
+          // onConfirm: () {
+          //   Get.back();
+          // },
         );
       }
     } catch (e) {
@@ -215,6 +246,13 @@ class _ClientLoginState extends State<ClientLogin> {
         elevation: 0,
         backgroundColor: goldenColor,
         title: Text("تسجيل الدخول"),
+         leading: IconButton(
+            onPressed: () {
+              navigator!.pop();
+            },
+            icon:
+            Icon(Icons.arrow_back_ios_rounded)
+            ),
       ),
       body: Center(
         child: Column(

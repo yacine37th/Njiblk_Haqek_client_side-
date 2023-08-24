@@ -84,7 +84,7 @@ class _AvocatSendingState extends State<AvocatSending> {
                 return Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CircularProgressIndicator(
                         backgroundColor: goldenColor,

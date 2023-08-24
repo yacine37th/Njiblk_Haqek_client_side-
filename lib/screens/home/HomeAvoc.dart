@@ -54,6 +54,10 @@ class _HomeAvocState extends State<HomeAvoc> {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+                    // selectedItemColor: goldenColor,
+
         // selectedIconTheme:  IconThemeData(
         //   color:  Color.fromRGBO(32, 48, 61, 1),
 
@@ -70,13 +74,15 @@ class _HomeAvocState extends State<HomeAvoc> {
             activeIcon: Icon(Icons.home, color: goldenColor),
 
             label: "المحاميين",
+            backgroundColor: goldenColor
             // backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            activeIcon: Icon(Icons.document_scanner, color: goldenColor),
+            activeIcon: Icon(Icons.search, color: goldenColor),
 
-            icon: Icon(Icons.document_scanner),
-            label: "الباحثين عن محامي",
+            icon: Icon(Icons.search),
+            label: "الأشخاص الباحثين عن محامي",
+            
             // backgroundColor: Colors.green,
           ),
          
@@ -99,7 +105,8 @@ class _HomeAvocState extends State<HomeAvoc> {
           // ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: greenColor,
+        // unselectedItemColor: Colors.amber,
         onTap: _onItemTapped,
       ),
       body: screens[_selectedIndex],

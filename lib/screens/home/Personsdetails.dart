@@ -43,6 +43,13 @@ class _PersonDetailsState extends State<PersonDetails> {
       appBar: AppBar(
         title: Text("معلومات الشخص "),
         backgroundColor: goldenColor,
+         leading: IconButton(
+            onPressed: () {
+              navigator!.pop();
+            },
+            icon:
+            Icon(Icons.arrow_back_ios_rounded)
+            ),
       ),
       body:
       verif ?    Center(

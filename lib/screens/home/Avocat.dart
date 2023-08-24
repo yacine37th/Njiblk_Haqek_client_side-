@@ -67,6 +67,15 @@ class _AvocatState extends State<Avocat> {
     // print(currentUser!.uid);
     if (currentUser == null) {
     } else {
+        // Get.defaultDialog(
+        // onWillPop: () {
+        //   return Future.value();
+        // },
+        // barrierDismissible: false,
+        // title: "يرجى الانتظار",
+        // content: const CircularProgressIndicator(
+        //   backgroundColor: goldenColor,
+        // ));
       FirebaseFirestore.instance
           .collection('users')
           .doc(currentUser.uid)
@@ -80,8 +89,11 @@ class _AvocatState extends State<Avocat> {
           if (data["userType"] == "محامي" && data["isAccepted?"] == true) {
             // MainFunctions.textDirection = TextDirection.rtl;
             // Get.forceAppUpdate();
+            Get.back();
             Get.offAllNamed("/avocatAvoc" , arguments:  data);
           } else {
+            Get.back();
+
             Lougout();
           }
         });
@@ -203,24 +215,52 @@ class _AvocatState extends State<Avocat> {
       if (e.code == 'user-not-found') {
         Get.defaultDialog(
           title: "حساب غير موجود",
-          content: const Icon(
-            Icons.report_problem,
-            color: Colors.red,
-          ),
-          onConfirm: () {
-            Get.back();
-          },
+             content: ElevatedButton(
+                  onPressed: () async {
+                    Get.back();
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(greenColor),
+                  ),
+                  child: Text(
+                    'حسنا', 
+                    style: TextStyle(
+                        fontSize: 20, fontFamily: 'Cairo', color: whiteColor),
+                  ),
+                )
+      
+          // content: const Icon(
+          //   Icons.report_problem,
+          //   color: Colors.red,
+          // ),
+          // onConfirm: () {
+          //   Get.back();
+          // },
         );
       } else if (e.code == 'wrong-password') {
         Get.defaultDialog(
           title: "يرجى مراجعة كلمة المرور",
-          content: const Icon(
-            Icons.report_problem,
-            color: Colors.red,
-          ),
-          onConfirm: () {
-            Get.back();
-          },
+             content: ElevatedButton(
+                  onPressed: () async {
+                    Get.back();
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(greenColor),
+                  ),
+                  child: Text(
+                    'حسنا', 
+                    style: TextStyle(
+                        fontSize: 20, fontFamily: 'Cairo', color: whiteColor),
+                  ),
+                )
+      
+          // content: const Icon(
+          //   Icons.report_problem,
+          //   color: Colors.red,
+          // ),
+          // onConfirm: () {
+          //   Get.back();
+          // },
         );
       }
     } catch (e) {
@@ -246,6 +286,13 @@ class _AvocatState extends State<Avocat> {
         elevation: 0,
         backgroundColor: goldenColor,
         title: Text("تسجيل الدخول"),
+         leading: IconButton(
+            onPressed: () {
+              navigator!.pop();
+            },
+            icon:
+            Icon(Icons.arrow_back_ios_rounded)
+            ),
       ),
       body: Center(
         child: Column(

@@ -236,6 +236,13 @@ class _AvocatRegisterState extends State<AvocatRegister> {
         elevation: 0,
         backgroundColor: goldenColor,
         title: Text(" إنشاء حساب جديد"),
+         leading: IconButton(
+            onPressed: () {
+              navigator!.pop();
+            },
+            icon:
+            Icon(Icons.arrow_back_ios_rounded)
+            ),
       ),
       body: Center(
         child: SingleChildScrollView(

@@ -25,6 +25,13 @@ class _FindLawyerState extends State<FindLawyer> {
       appBar: AppBar(
         title: Text('لائحة المحاميين '),
         backgroundColor: goldenColor,
+          leading: IconButton(
+            onPressed: () {
+              navigator!.pop();
+            },
+            icon:
+            Icon(Icons.arrow_back_ios_rounded)
+            ),
       ),
       body: SafeArea(
         child: StreamBuilder<QuerySnapshot>(
