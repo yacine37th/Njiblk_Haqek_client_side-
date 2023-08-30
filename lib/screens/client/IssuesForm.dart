@@ -156,7 +156,7 @@ class _IssuesFormState extends State<IssuesForm> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: goldenColor,
+        backgroundColor: greenColor,
         title: Text('معلومات المشكلة'),
           leading: IconButton(
             onPressed: () {

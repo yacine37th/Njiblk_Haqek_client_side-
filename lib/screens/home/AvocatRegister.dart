@@ -234,7 +234,7 @@ class _AvocatRegisterState extends State<AvocatRegister> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: goldenColor,
+        backgroundColor: greenColor,
         title: Text(" إنشاء حساب جديد"),
          leading: IconButton(
             onPressed: () {

@@ -24,7 +24,7 @@ class _FindLawyerState extends State<FindLawyer> {
     return Scaffold(
       appBar: AppBar(
         title: Text('لائحة المحاميين '),
-        backgroundColor: goldenColor,
+        backgroundColor: greenColor,
           leading: IconButton(
             onPressed: () {
               navigator!.pop();
@@ -56,7 +56,7 @@ class _FindLawyerState extends State<FindLawyer> {
                 );
                 // Text('${snapshot.connectionState}');
               }
-              if (snapshot.data!.docs.map == []) {
+              if (snapshot.hasData && snapshot.data!.docs.isEmpty) {
                 return Center(
                   child: Text(
                     "لا يوجد محاميين مسجلين ",

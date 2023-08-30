@@ -58,11 +58,11 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: goldenColor,
+        backgroundColor: greenColor,
         title: Text("الصفحة الرئيسية"),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Icons.logout , color: whiteColor,),
             color: greenColor,
             tooltip: 'تسجيل الخروج',
             onPressed: () async {

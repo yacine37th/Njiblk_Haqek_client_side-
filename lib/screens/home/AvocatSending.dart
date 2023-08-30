@@ -57,10 +57,10 @@ class _AvocatSendingState extends State<AvocatSending> {
       appBar: AppBar(
         // ذ
         title: Text('قائمة الأشخاص المحولين من طرف الأدمين  '),
-        backgroundColor: goldenColor,
+        backgroundColor: greenColor,
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Icons.logout , color: whiteColor,),
             color: greenColor,
             tooltip: 'تسجيل الخروج',
             onPressed: () async {

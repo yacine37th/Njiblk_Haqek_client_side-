@@ -109,7 +109,7 @@ class _LawyerDetailsState extends State<LawyerDetails> {
     return Scaffold(
       appBar: AppBar(
         title: Text("معلومات المحامي "),
-        backgroundColor: goldenColor,
+        backgroundColor: greenColor,
          leading: IconButton(
             onPressed: () {
               navigator!.pop();

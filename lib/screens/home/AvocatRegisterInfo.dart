@@ -289,7 +289,7 @@ class _AvoctaRegisteInforState extends State<AvocatRegisterInfo> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: goldenColor,
+        backgroundColor: greenColor,
         title: Text(" تحميل السيرة الداتية"),
          leading: IconButton(
             onPressed: () {

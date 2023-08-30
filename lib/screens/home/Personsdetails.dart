@@ -42,7 +42,7 @@ class _PersonDetailsState extends State<PersonDetails> {
     return Scaffold(
       appBar: AppBar(
         title: Text("معلومات الشخص "),
-        backgroundColor: goldenColor,
+        backgroundColor: greenColor,
          leading: IconButton(
             onPressed: () {
               navigator!.pop();

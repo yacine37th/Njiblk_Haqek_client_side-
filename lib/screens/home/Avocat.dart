@@ -284,7 +284,7 @@ class _AvocatState extends State<Avocat> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: goldenColor,
+        backgroundColor: greenColor,
         title: Text("تسجيل الدخول"),
          leading: IconButton(
             onPressed: () {

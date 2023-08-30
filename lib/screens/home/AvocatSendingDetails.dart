@@ -27,7 +27,7 @@ class _AvocatSendingDetailsState extends State<AvocatSendingDetails> {
       appBar: AppBar(
         // ذ
         title: Text('معلومات الشخص       '),
-        backgroundColor: goldenColor,
+        backgroundColor: greenColor,
         leading: IconButton(
             onPressed: () {
               navigator!.pop();
