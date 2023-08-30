@@ -111,8 +111,16 @@ class _AvocatSendingState extends State<AvocatSending> {
               //     ),
               //   );
               // }
-              if (snapshot.data == []) {
-                return Center(child: Text('No Patients'));
+              if (snapshot.hasData && snapshot.data!.docs.isEmpty) {
+                return Center(
+                    child: Text(
+                      "لا يوجد أشخص حاولوا إرسال", 
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: goldenColor),
+                    ),
+                  );
               }
 
               return ListView(
@@ -155,7 +163,13 @@ class _AvocatSendingState extends State<AvocatSending> {
                           //   print('DOWNLOAD ERROR: $error');
                           // });
                         },
-                        title: Text(data["userName"]),
+                        title: Row(
+                          children: [
+                            Icon(Icons.person , size: 30,),
+                            SizedBox(width: 20,),
+                            Text(data["userName"]),
+                          ],
+                        ),
                         subtitle: Text(data["userEmail"]),
                       ),
                     ),

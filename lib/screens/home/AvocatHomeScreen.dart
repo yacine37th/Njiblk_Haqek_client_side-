@@ -111,8 +111,16 @@ class _AvocatHomeScreenState extends State<AvocatHomeScreen> {
               //     ),
               //   );
               // }
-              if (snapshot.data == []) {
-                return Center(child: Text('No Patients'));
+              if (snapshot.hasData && snapshot.data!.docs.isEmpty) {
+                return  Center(
+                    child: Text(
+                      "لا يوجد أشخص حاولوا إرسال    ", 
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: goldenColor),
+                    ),
+                  );
               }
 
               return ListView(
@@ -155,7 +163,13 @@ class _AvocatHomeScreenState extends State<AvocatHomeScreen> {
                           //   print('DOWNLOAD ERROR: $error');
                           // });
                         },
-                        title: Text("شخص أرسل طلب من أجل  التواصل"),
+                        title: Row(
+                          children: [
+                            Icon(Icons.person , size: 30,),
+                            SizedBox(width: 20,),
+                            Text("شخص أرسل طلب من أجل  التواصل"),
+                          ],
+                        ),
                         // subtitle: Text(data["userID"]),
                       ),
                     ),

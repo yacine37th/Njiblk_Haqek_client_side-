@@ -316,14 +316,14 @@ class _IssuesFormState extends State<IssuesForm> {
                               vertical: 10, horizontal: 30),
                           child: TextFormField(
                             // The validator receives the text that the user has entered.
-                            validator: (val) {
-                              if (val!.isEmpty) {
-                                return "من فضلك املأ المعلومات";
-                              } else if (val.length < 2) {
-                                return "يجب ان يكون أكثر من حرفين";
-                              }
-                              return null;
-                            },
+                            // validator: (val) {
+                            //   if (val!.isEmpty) {
+                            //     return "من فضلك املأ المعلومات";
+                            //   } else if (val.length < 2) {
+                            //     return "يجب ان يكون أكثر من حرفين";
+                            //   }
+                            //   return null;
+                            // },
                             controller: issue,
                             decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(

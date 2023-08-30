@@ -108,7 +108,19 @@ class _FindLawyerState extends State<FindLawyer> {
                           //   print('DOWNLOAD ERROR: $error');
                           // });
                         },
-                        title: Text("${data['userName']}"),
+                        title: Row(
+                          children: [
+                             SizedBox(
+                        height: 40,
+                        width: 40,
+                        child: Image.asset(
+                          "assets/images/lawyer.png",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                            Text("${data['userName']}"),
+                          ],
+                        ),
                         subtitle: Text(data["userEmail"]),
                       ),
                     ),
