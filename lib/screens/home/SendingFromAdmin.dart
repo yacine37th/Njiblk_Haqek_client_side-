@@ -111,8 +111,16 @@ class _SendingFromAdminState extends State<SendingFromAdmin> {
               //     ),
               //   );
               // }
-              if (snapshot.data == []) {
-                return Center(child: Text('No Patients'));
+              if (snapshot.hasData && snapshot.data!.docs.isEmpty) {
+                return  Center(
+                    child: Text(
+                      "لا يوجد أشخص حاولوا إرسال    ", 
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: goldenColor),
+                    ),
+                  );
               }
 
               return ListView(

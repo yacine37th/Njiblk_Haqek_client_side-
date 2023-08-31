@@ -117,31 +117,8 @@ class _AvoctaRegisteInforState extends State<AvocatRegisterInfo> {
     });
   }
 
-  var _selectedLocation;
-  bool _obscureText = false;
-
-  void _toggle() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
-
-  bool _obscured = true;
-  final textFieldFocusNode = FocusNode();
-
-  void _toggleObscured() {
-    setState(() {
-      _obscured = !_obscured;
-      if (textFieldFocusNode.hasPrimaryFocus)
-        return; // If focus is on text field, dont unfocus
-      textFieldFocusNode.canRequestFocus =
-          false; // Prevents focus if tap on eye
-    });
-  }
-
+ 
   var db = FirebaseFirestore.instance;
-  Route route = MaterialPageRoute(builder: (context) => SingIn());
-
   Future createNewUser() async {
     Get.defaultDialog(
       barrierDismissible: false,
@@ -189,22 +166,7 @@ class _AvoctaRegisteInforState extends State<AvocatRegisterInfo> {
           titleStyle: TextStyle(color: whiteColor),
           content: ElevatedButton(
             onPressed: () async {
-              // Get.defaultDialog(
-              //   barrierDismissible: false,
-              //   title: "يرجى الانتظار",
-              //   content: const CircularProgressIndicator(
-              //     backgroundColor: goldenColor,
-              //   ),
-              //   //  onConfirm: () {
-              //   //     Get.back();
-              //   //   },
-              // );
-         
               await FirebaseAuth.instance.signOut();
-
-              // Get.back();
-              // Get.offAllNamed("/avocatLogin");
-              // Get.off("/avocatLogin");
 
               Get.back();
 
@@ -291,13 +253,11 @@ class _AvoctaRegisteInforState extends State<AvocatRegisterInfo> {
         elevation: 0,
         backgroundColor: greenColor,
         title: Text(" تحميل السيرة الداتية"),
-         leading: IconButton(
+        leading: IconButton(
             onPressed: () {
               navigator!.pop();
             },
-            icon:
-            Icon(Icons.arrow_back_ios_rounded)
-            ),
+            icon: Icon(Icons.arrow_back_ios_rounded)),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -326,60 +286,6 @@ class _AvoctaRegisteInforState extends State<AvocatRegisterInfo> {
                     fit: BoxFit.cover,
                   ),
                 ),
-
-                // CheckboxListTile(
-                //   title: Text('أوافق على الشروط'),
-                //   value: selectedOptions.contains('أوافق'),
-                //   onChanged: (bool? value) {
-                //     setState(() {
-                //       if (value!) {
-                //         selectedOptions.add('Book Or Picture');
-                //         shouldDisplay2 = true;
-                //       } else {
-                //         selectedOptions.remove('Book Or Picture');
-                //         shouldDisplay2 = false;
-                //       }
-                //     });
-                //   },
-                // ),
-                // // const SizedBox(
-                //   height: 20,
-                // ),
-                // Padding(
-                //   padding: const EdgeInsets.all(20),
-                //   child: TextButton(
-                //     style: ButtonStyle(
-                //       backgroundColor: MaterialStateProperty.all(greenColor),
-                //     ),
-                //     onPressed: () {
-                //       // if (pickFile != null) {
-                //       //   createNewUser();
-                //       //   //          Navigator.pushAndRemoveUntil(
-                //       //   //   context,
-                //       //   //   MaterialPageRoute(builder: (context) =>),
-                //       //   //   (Route<dynamic> route) => false,
-                //       //   // );
-                //       // }
-                //       Get.off("/avocatLogin");
-                //     },
-                //     child: const Text(
-                //       " متابعة",
-                //       style: TextStyle(
-                //           fontSize: 17, fontFamily: 'Cairo', color: whiteColor),
-                //     ),
-                //   ),
-                // ),
-
-                // GestureDetector(
-                //   onTap: () {
-                //     //  Get.off("/avocatLogin");
-                //     //  Get.to("/avocatLogin");
-                //     Get.back();
-                //     Get.back();
-                //   },
-                //   child: Text("deded"),
-                // ),
-
                 Padding(
                   padding: const EdgeInsets.all(20),
                   child: ElevatedButton(
