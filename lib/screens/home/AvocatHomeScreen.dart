@@ -60,7 +60,10 @@ class _AvocatHomeScreenState extends State<AvocatHomeScreen> {
         backgroundColor: greenColor,
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.logout , color: whiteColor,),
+            icon: const Icon(
+              Icons.logout,
+              color: whiteColor,
+            ),
             color: greenColor,
             tooltip: 'تسجيل الخروج',
             onPressed: () async {
@@ -112,15 +115,15 @@ class _AvocatHomeScreenState extends State<AvocatHomeScreen> {
               //   );
               // }
               if (snapshot.hasData && snapshot.data!.docs.isEmpty) {
-                return  Center(
-                    child: Text(
-                      "لا يوجد أشخص حاولوا إرسال    ", 
-                      style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: goldenColor),
-                    ),
-                  );
+                return Center(
+                  child: Text(
+                    "لا يوجد أشخص حاولوا إرسال    ",
+                    style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: goldenColor),
+                  ),
+                );
               }
 
               return ListView(
@@ -165,8 +168,13 @@ class _AvocatHomeScreenState extends State<AvocatHomeScreen> {
                         },
                         title: Row(
                           children: [
-                            Icon(Icons.person , size: 30,),
-                            SizedBox(width: 20,),
+                            Icon(
+                              Icons.person,
+                              size: 30,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
                             Text("شخص أرسل طلب من أجل  التواصل"),
                           ],
                         ),

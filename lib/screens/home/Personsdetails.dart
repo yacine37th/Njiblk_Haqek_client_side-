@@ -91,7 +91,8 @@ class _PersonDetailsState extends State<PersonDetails> {
                         // launchPhoneDialer(data["userPhoneNumber"]);
 
                         // UrlLauncher.launch('mailto:${p.email}'),
-                        launchPhoneDialer("${Get.arguments["userPhoneNumber"]}");
+                        launchPhoneDialer(
+                            "${Get.arguments["userPhoneNumber"]}");
                       },
                       child: Text(
                           " رقم هاتف الشخص : ${data["userPhoneNumber"]} ",

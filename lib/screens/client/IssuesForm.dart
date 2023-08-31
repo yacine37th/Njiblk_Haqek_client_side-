@@ -15,12 +15,12 @@ class _IssuesFormState extends State<IssuesForm> {
   late AnimationController _controller;
   final _formKey = GlobalKey<FormState>();
   final issueContent = TextEditingController();
-  final username= TextEditingController();
-  final phone= TextEditingController();
-  final email= TextEditingController();
-  final issue= TextEditingController();
-  
-  // 
+  final username = TextEditingController();
+  final phone = TextEditingController();
+  final email = TextEditingController();
+  final issue = TextEditingController();
+
+  //
   var currentUser;
   @override
   void initState() {
@@ -72,35 +72,33 @@ class _IssuesFormState extends State<IssuesForm> {
       var doc = await FirebaseFirestore.instance
           .collection("users")
           .doc(currentUser!.uid);
-          var dcoissue = await FirebaseFirestore.instance
-          .collection("adminissue")
-          .doc();
+      var dcoissue =
+          await FirebaseFirestore.instance.collection("adminissue").doc();
       doc.update({
         "issueAdminID": FieldValue.arrayUnion([dcoissue.id]),
       });
       dcoissue.set({
-        "issueID" : dcoissue.id,
-         "userEmail": email.text,
+        "issueID": dcoissue.id,
+        "userEmail": email.text,
         "userName": username.text,
         "userWilaya": _selectedLocation,
         "userPhoneNumber": phone.text,
-        "userID":doc.id,
-        "issueType" : issue.text , 
-        "issueContent" :issueContent.text, 
+        "userID": doc.id,
+        "issueType":_selectedLocation2,
+        "issueContent": issueContent.text,
       });
       print("dedededed/////////////////2");
 
       Get.back();
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: const Text("تم حفظ قضيتك بنجاح إنتظر رد المحامي ")));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: const Text("تم حفظ قضيتك بنجاح إنتظر رد المحامي ")));
       Get.back();
     } catch (e) {
       print(e);
     }
   }
 
-
-    List<String> _locations = [
+  List<String> _locations = [
     'أدرار',
     'الشلف',
     "الأغواط",
@@ -148,8 +146,22 @@ class _IssuesFormState extends State<IssuesForm> {
     "عين تيموشنت",
     "غرداية",
     "غليزان"
-  ]; // Option 2
+  ];
   var _selectedLocation;
+
+
+List<String> _locations2 = [
+    'مدني',
+    'أسري',
+    "الأغواط",
+    "تجاري ",
+    "عقاري",
+    "إجتماعي",
+    "بحري",
+    "جنائي",
+    "إداري",
+  ];
+  var _selectedLocation2;
 
   @override
   Widget build(BuildContext context) {
@@ -158,13 +170,11 @@ class _IssuesFormState extends State<IssuesForm> {
         elevation: 0,
         backgroundColor: greenColor,
         title: Text('معلومات المشكلة'),
-          leading: IconButton(
+        leading: IconButton(
             onPressed: () {
               navigator!.pop();
             },
-            icon:
-            Icon(Icons.arrow_back_ios_rounded)
-            ),
+            icon: Icon(Icons.arrow_back_ios_rounded)),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -176,175 +186,202 @@ class _IssuesFormState extends State<IssuesForm> {
                   key: _formKey,
                   child: Column(
                     // crossAxisAlignment: CrossAxisAlignment.center,
-                       crossAxisAlignment: CrossAxisAlignment.stretch,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     // mainAxisSize: MainAxisSize.min,
-        
+
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                          Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 30),
-                          child: TextFormField(
-                            // The validator receives the text that the user has entered.
-                            validator: (val) {
-                              if (val!.isEmpty) {
-                                return "من فضلك املأ المعلومات";
-                              } else if (val.length < 2) {
-                                return "يجب ان يكون أكثر من حرفين";
-                              }
-                              return null;
-                            },
-                            controller: username,
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: goldenColor, width: 1.0),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15))
-        
-                                  // borderRadius: BorderRadius.circular(25.0),
-                                  ),
-                              prefixIconColor: goldenColor,
-                              hintStyle: TextStyle(
-                                  fontFamily: 'Cairo', color: Colors.grey),
-                              // border: OutlineInputBorder(),
-                              hintText: " الاسم و اللقب",
-                              // labelText: "Entrer votre nom d'utilisateur",
-                              prefixIcon: Icon(Icons.person_2),
-                            ),
-                          ),
-                        ),
-                   
-                                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 30),
-                          child: TextFormField(
-                            // The validator receives the text that the user has entered.
-                            validator: (val) {
-                              if (val!.isEmpty) {
-                                return "من فضلك املأ رقم الهاتف";
-                              } else if (val.length < 8) {
-                                return "يجب أن يكون أكثر من 8 أرقام  ";
-                              }
-                              return null;
-                            },
-                            controller: phone,
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: goldenColor, width: 1.0),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15))
-        
-                                  // borderRadius: BorderRadius.circular(25.0),
-                                  ),
-                              prefixIconColor: goldenColor,
-                              hintStyle: TextStyle(
-                                  fontFamily: 'Cairo', color: Colors.grey),
-                              // border: OutlineInputBorder(),
-                              hintText: "رقم الهاتف",
-                              // labelText: "Entrer votre nom d'utilisateur",
-                              prefixIcon: Icon(Icons.phone),
-                            ),
-                          ),
-                        ),
-                     
-         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 30),
-                          child: TextFormField(
-                            textInputAction: TextInputAction.next,
-                            keyboardType: TextInputType.emailAddress,
-                            controller: email,
-                            validator: (val) {
-                              if (val!.isEmpty) {
-                                return "من فضلك املأ البريد الإلكتروني";
-                              }
-                              if (!RegExp(
-                                      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
-                                  .hasMatch(val)) {
-                                return "من فضلك املأ بريد إلكتروني صحيح";
-                              }
-        
-                              return null;
-                            },
-                            decoration: const InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: goldenColor, width: 1.0),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15))
-        
-                                  // borderRadius: BorderRadius.circular(25.0),
-                                  ),
-                              prefixIconColor: goldenColor,
-                              prefixIcon: Icon(Icons.mail_outline_rounded),
-                              hintText: 'البريد الإكتروني',
-                              hintStyle: TextStyle(
-                                  fontFamily: 'Cairo', color: Colors.grey),
-                            ),
-                          ),
-                        ),
-                      
                       Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 30),
-                          child: DropdownButton(
-                            hint: Text("ولايةالتي تقيم فيها"),
-                            // Text("ولاية ال\\"), // Not necessary for Option 1
-                            value: _selectedLocation,
-        
-                            onChanged: (newValue) {
-                              setState(() {
-                                _selectedLocation = newValue;
-                              });
-                            },
-                            //  validator: (value) =>
-                            //       value == null ? 'Select the Category of the book' : null,
-        
-                            items: _locations.map((location) {
-                              return DropdownMenuItem(
-                                child: new Text(location),
-                                value: location,
-                              );
-                            }).toList(),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 30),
+                        child: TextFormField(
+                          // The validator receives the text that the user has entered.
+                          validator: (val) {
+                            if (val!.isEmpty) {
+                              return "من فضلك املأ المعلومات";
+                            } else if (val.length < 2) {
+                              return "يجب ان يكون أكثر من حرفين";
+                            }
+                            return null;
+                          },
+                          controller: username,
+                          decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: goldenColor, width: 1.0),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15))
+
+                                // borderRadius: BorderRadius.circular(25.0),
+                                ),
+                            prefixIconColor: goldenColor,
+                            hintStyle: TextStyle(
+                                fontFamily: 'Cairo', color: Colors.grey),
+                            // border: OutlineInputBorder(),
+                            hintText: " الاسم و اللقب",
+                            // labelText: "Entrer votre nom d'utilisateur",
+                            prefixIcon: Icon(Icons.person_2),
                           ),
                         ),
-                      
-        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 30),
-                          child: TextFormField(
-                            // The validator receives the text that the user has entered.
-                            // validator: (val) {
-                            //   if (val!.isEmpty) {
-                            //     return "من فضلك املأ المعلومات";
-                            //   } else if (val.length < 2) {
-                            //     return "يجب ان يكون أكثر من حرفين";
-                            //   }
-                            //   return null;
-                            // },
-                            controller: issue,
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: goldenColor, width: 1.0),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15))
-        
-                                  // borderRadius: BorderRadius.circular(25.0),
-                                  ),
-                              prefixIconColor: goldenColor,
-                              hintStyle: TextStyle(
-                                  fontFamily: 'Cairo', color: Colors.grey),
-                              // border: OutlineInputBorder(),
-                              hintText: "  نوع النزاع",
-                              // labelText: "Entrer votre nom d'utilisateur",
-                              prefixIcon: Icon(Icons.sd_card_alert_rounded),
-                            ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 30),
+                        child: TextFormField(
+                          // The validator receives the text that the user has entered.
+                          validator: (val) {
+                            if (val!.isEmpty) {
+                              return "من فضلك املأ رقم الهاتف";
+                            } else if (val.length < 8) {
+                              return "يجب أن يكون أكثر من 8 أرقام  ";
+                            }
+                            return null;
+                          },
+                          controller: phone,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: goldenColor, width: 1.0),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15))
+
+                                // borderRadius: BorderRadius.circular(25.0),
+                                ),
+                            prefixIconColor: goldenColor,
+                            hintStyle: TextStyle(
+                                fontFamily: 'Cairo', color: Colors.grey),
+                            // border: OutlineInputBorder(),
+                            hintText: "رقم الهاتف",
+                            // labelText: "Entrer votre nom d'utilisateur",
+                            prefixIcon: Icon(Icons.phone),
                           ),
                         ),
-                   
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 30),
+                        child: TextFormField(
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.emailAddress,
+                          controller: email,
+                          validator: (val) {
+                            if (val!.isEmpty) {
+                              return "من فضلك املأ البريد الإلكتروني";
+                            }
+                            if (!RegExp(
+                                    r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
+                                .hasMatch(val)) {
+                              return "من فضلك املأ بريد إلكتروني صحيح";
+                            }
+
+                            return null;
+                          },
+                          decoration: const InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: goldenColor, width: 1.0),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15))
+
+                                // borderRadius: BorderRadius.circular(25.0),
+                                ),
+                            prefixIconColor: goldenColor,
+                            prefixIcon: Icon(Icons.mail_outline_rounded),
+                            hintText: 'البريد الإكتروني',
+                            hintStyle: TextStyle(
+                                fontFamily: 'Cairo', color: Colors.grey),
+                          ),
+                        ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 30),
+                        child: DropdownButton(
+                          hint: Text("الولاية التي تقيم فيها  "),
+                          // Text("ولاية ال\\"), // Not necessary for Option 1
+                          value: _selectedLocation,
+
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedLocation = newValue;
+                            });
+                          },
+                          //  validator: (value) =>
+                          //       value == null ? 'Select the Category of the book' : null,
+
+                          items: _locations.map((location) {
+                            return DropdownMenuItem(
+                              child: new Text(location),
+                              value: location,
+                            );
+                          }).toList(),
+                        ),
+                      ),
+
+
+Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 30),
+                        child: DropdownButton(
+                          hint: Text(" نوع النزاع "),
+                          // Text("ولاية ال\\"), // Not necessary for Option 1
+                          value: _selectedLocation2,
+
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedLocation2 = newValue;
+                            });
+                          },
+                          //  validator: (value) =>
+                          //       value == null ? 'Select the Category of the book' : null,
+
+                          items: _locations2.map((location) {
+                            return DropdownMenuItem(
+                              child: new Text(location),
+                              value: location,
+                            );
+                          }).toList(),
+                        ),
+                      ),
+
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(
+                      //       vertical: 10, horizontal: 30),
+                      //   child: TextFormField(
+                      //     // The validator receives the text that the user has entered.
+                      //     // validator: (val) {
+                      //     //   if (val!.isEmpty) {
+                      //     //     return "من فضلك املأ المعلومات";
+                      //     //   } else if (val.length < 2) {
+                      //     //     return "يجب ان يكون أكثر من حرفين";
+                      //     //   }
+                      //     //   return null;
+                      //     // },
+                      //     controller: issue,
+                      //     decoration: InputDecoration(
+                      //       focusedBorder: OutlineInputBorder(
+                      //           borderSide: const BorderSide(
+                      //               color: goldenColor, width: 1.0),
+                      //           borderRadius:
+                      //               BorderRadius.all(Radius.circular(15))
+
+                      //           // borderRadius: BorderRadius.circular(25.0),
+                      //           ),
+                      //       prefixIconColor: goldenColor,
+                      //       hintStyle: TextStyle(
+                      //           fontFamily: 'Cairo', color: Colors.grey),
+                      //       // border: OutlineInputBorder(),
+                      //       hintText: "  نوع النزاع",
+                      //       // labelText: "Entrer votre nom d'utilisateur",
+                      //       prefixIcon: Icon(Icons.sd_card_alert_rounded),
+                      //     ),
+                      //   ),
+                      // ),
+
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 30),
@@ -374,11 +411,11 @@ class _IssuesFormState extends State<IssuesForm> {
                             hintStyle: TextStyle(
                                 fontFamily: 'Cairo', color: Colors.grey),
                             hintText: " أدخل وقائع النزاع  ...  ",
-                            prefixIcon:Icon(Icons.handshake)
+                            prefixIcon: Icon(Icons.handshake)
                             //  SizedBox(
                             //   height: 5,
                             //   width: 5,
-                            //   child: 
+                            //   child:
                             //   Image.asset(
                             //     "assets/images/edit-editor-pen-pencil-write-icon--4 (1).png",
                             //     fit: BoxFit.cover,
@@ -394,15 +431,15 @@ class _IssuesFormState extends State<IssuesForm> {
                         height: 15,
                       ),
                       Padding(
-                         padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 30),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 30),
                         child: ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all(greenColor),
                           ),
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
+                            if (_formKey.currentState!.validate() ) {
                               submit();
                               // signInA;User();
                               //          Navigator.pushAndRemoveUntil(
@@ -418,15 +455,14 @@ class _IssuesFormState extends State<IssuesForm> {
                           ),
                         ),
                       ),
-        
-                      //naw3 nize3 
-                  
-                      // 
-                      // 
+
+                      //naw3 nize3
+
                       //
-                      //wa9ai3 niza3 (3ard moufasel lel niza3 
-                      // kayfiyet tawasol m3ana woula m3a mouhami 
-        
+                      //
+                      //
+                      //wa9ai3 niza3 (3ard moufasel lel niza3
+                      // kayfiyet tawasol m3ana woula m3a mouhami
                     ],
                   ),
                 ),

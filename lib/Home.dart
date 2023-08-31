@@ -109,10 +109,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             height: 180,
                             width: 180,
                             child: const Image(
-                                image:
-                                    AssetImage('assets/images/ic_launcher.jpg'),
-                                     
-                                    )
+                              image:
+                                  AssetImage('assets/images/ic_launcher.jpg'),
+                            )
                             //  Image.asset(
                             //   "assets/images/ic_launcher.jpg",
                             //   fit: BoxFit.cover,
@@ -122,13 +121,38 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       Container(
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Text(
-                                "التطبيق عبارة عن وسيط إلكتروني 🤝 سيدي الباحث عن محامي سنجد لك محامي يتكفل بقضيتك بطريقة سهلة وسريعة توفر لك الوقت والجهد والمسافة.🕜🚗 سيدي المحامي سنضع التطبيق في خدمتك مقابل مبلغ مالي رمزي على ان تحدد قيمته لاحقا 📝"
-                                ,
-                                style: TextStyle(fontSize: 16),
-                              ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 15),
+                                  child: Text(
+                                    "التطبيق عبارة عن وسيط إلكتروني 🤝 .",
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 5),
+                                  child: Text(
+                                    //
+                                    "سيدي الباحث عن محامي سنجد لك محامي يتكفل بقضيتك بطريقة سهلة وسريعة توفر لك الوقت والجهد و المسافة  🕜🚗 ",
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 5),
+                                  child: Text(
+                                    "سيدي المحامي  سنضع التطبيق في خدمتك مقابل مبلغ مالي رمزي على ان تحدد قيمته  لاحقا 📝. ",
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 15,
                             ),
                             TextButton(
                               onPressed: () {
@@ -136,19 +160,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 Get.forceAppUpdate();
                                 Get.offAllNamed("/home");
                               },
-                              child: 
-                              Text(
+                              child: Text(
                                 " واصل ",
                                 style:
                                     TextStyle(color: whiteColor, fontSize: 18),
-                              )
-                              ,
+                              ),
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all(greenColor)),
                             ),
-                      
-                      
                           ],
                         ),
                       ),
